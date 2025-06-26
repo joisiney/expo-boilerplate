@@ -1,50 +1,133 @@
-# Welcome to your Expo app 👋
+# 🚀 Expo Boilerplate
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Um boilerplate moderno e bem estruturado para desenvolvimento de aplicações React Native com Expo.
 
-## Get started
+## ✨ Funcionalidades
 
-1. Install dependencies
+- **Expo SDK 53** - Framework moderno para desenvolvimento React Native
+- **Expo Router** - Navegação baseada em arquivos
+- **TypeScript** - Tipagem estática para melhor desenvolvimento
+- **Fonte Quicksand** - Tipografia moderna e elegante
+- **Jest + Testing Library** - Testes unitários e de componentes
+- **ESLint** - Linting para qualidade de código
+- **Cobertura de testes** - Relatórios de cobertura configurados
 
-   ```bash
-   npm install
-   ```
+## 📦 Estrutura do Projeto
 
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```
+src/
+├── app/                    # Rotas do Expo Router
+│   ├── _layout.tsx        # Layout principal
+│   ├── index.tsx          # Página inicial
+│   ├── +not-found.tsx     # Página 404
+│   └── *.spec.tsx         # Testes das páginas
+├── __tests__/             # Configurações de teste
+│   ├── mocks/             # Mocks para testes
+│   └── setup.ts           # Setup dos testes
+assets/
+├── fonts/                 # Fontes customizadas
+└── images/                # Imagens e ícones
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## 🛠️ Instalação
 
-## Learn more
+1. Clone o repositório:
+```bash
+git clone <url-do-repositorio>
+cd expo-boilerplate
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+2. Instale as dependências:
+```bash
+yarn install
+```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+3. Inicie o projeto:
+```bash
+yarn start
+```
 
-## Join the community
+## 📱 Scripts Disponíveis
 
-Join our community of developers creating universal apps.
+- `yarn start` - Inicia o Expo development server
+- `yarn android` - Abre no emulador Android
+- `yarn ios` - Abre no simulador iOS
+- `yarn web` - Abre no navegador web
+- `yarn test` - Executa os testes
+- `yarn test:watch` - Executa os testes em modo watch
+- `yarn test:coverage` - Executa os testes com relatório de cobertura
+- `yarn lint` - Executa o linting do código
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## 🧪 Testes
+
+O projeto inclui uma configuração completa de testes com:
+
+- **Jest** como runner de testes
+- **Testing Library** para testes de componentes React Native
+- **Mocks** configurados para Expo Router e React Native SVG
+- **Cobertura de código** com relatórios detalhados
+
+Para executar os testes:
+```bash
+yarn test
+```
+
+Para ver a cobertura:
+```bash
+yarn test:coverage
+```
+
+## 🎨 Customização
+
+### Fontes
+As fontes Quicksand estão pré-configuradas em três pesos:
+- Quicksand-Regular
+- Quicksand-Medium  
+- Quicksand-Bold
+
+### Cores e Estilos
+O projeto usa uma paleta de cores moderna e minimalista. Você pode personalizar os estilos nos arquivos de componentes.
+
+## 📝 Padrões de Desenvolvimento
+
+- **Componentes funcionais** com hooks
+- **TypeScript** para tipagem
+- **Testes unitários** para cada componente
+- **Estrutura de arquivos** organizada por funcionalidade
+- **Linting** para manter qualidade do código
+
+## 🚀 Deploy
+
+Este boilerplate está pronto para deploy nas seguintes plataformas:
+
+- **Expo Application Services (EAS)**
+- **App Store** (iOS)
+- **Google Play Store** (Android)
+- **Web** (através do Expo for Web)
+
+## 🤝 Contribuindo
+
+1. Faça um fork do projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
+3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. Push para a branch (`git push origin feature/AmazingFeature`)
+5. Abra um Pull Request
+
+## 📄 Licença
+
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+## 🎯 Próximos Passos
+
+Após configurar o boilerplate, você pode:
+
+1. Adicionar navegação em tabs
+2. Implementar autenticação
+3. Configurar gerenciamento de estado (Redux, Zustand, etc.)
+4. Adicionar mais telas e funcionalidades
+5. Configurar push notifications
+6. Implementar analytics
+
+---
+
+Feito com ❤️ para acelerar o desenvolvimento de apps com Expo!
