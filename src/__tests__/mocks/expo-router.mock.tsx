@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 jest.mock('expo-router/ui', () => {
     const React = require('react');
     const { View } = require('react-native');
