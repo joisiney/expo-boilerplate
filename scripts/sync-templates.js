@@ -37,27 +37,27 @@ function copyTemplate(templatePath, targetPath, description) {
 // Lista de templates para sincronizar
 const templates = [
     {
-        template: '.prettierrc',
+        template: 'prettierrc.template',
         target: '.prettierrc',
         description: 'Prettier config'
     },
     {
-        template: '.prettierignore',
+        template: 'prettierignore.template',
         target: '.prettierignore',
         description: 'Prettier ignore'
     },
     {
-        template: '.gitignore',
+        template: 'gitignore.template',
         target: '.gitignore',
         description: 'Git ignore'
     },
     {
-        template: '.vscode/settings.json',
+        template: 'vscode-config/settings.json',
         target: '.vscode/settings.json',
         description: 'VS Code settings'
     },
     {
-        template: '.vscode/extensions.json',
+        template: 'vscode-config/extensions.json',
         target: '.vscode/extensions.json',
         description: 'VS Code extensions'
     }

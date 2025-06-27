@@ -10,19 +10,25 @@ Os arquivos nesta pasta são os **TEMPLATES ORIGINAIS** que são copiados para n
 
 ```
 scripts/templates/
-├── .gitignore          # Template do Git ignore
-├── .prettierrc         # Template do Prettier
-├── .prettierignore     # Template do Prettier ignore
-└── .vscode/
-    ├── settings.json   # Template das configurações do VS Code
-    └── extensions.json # Template das extensões recomendadas
+├── gitignore.template          # Template do Git ignore
+├── prettierrc.template         # Template do Prettier
+├── prettierignore.template     # Template do Prettier ignore
+└── vscode-config/
+    ├── settings.json           # Template das configurações do VS Code
+    └── extensions.json         # Template das extensões recomendadas
 ```
 
 ## 🔄 Fluxo de Trabalho CORRETO
 
 ### Para EDITAR configurações:
 
-1. **Edite APENAS os arquivos em `scripts/templates/`**
+1. **Edite APENAS os arquivos template em `scripts/templates/`:**
+    - `prettierrc.template` → `.prettierrc`
+    - `prettierignore.template` → `.prettierignore`
+    - `gitignore.template` → `.gitignore`
+    - `vscode-config/settings.json` → `.vscode/settings.json`
+    - `vscode-config/extensions.json` → `.vscode/extensions.json`
+
 2. **Execute o script de sincronização:**
     ```bash
     yarn sync-templates

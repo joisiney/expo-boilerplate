@@ -7,9 +7,9 @@ const {execSync} = require('child_process');
 console.log('🔧 Configurando projeto...');
 
 // Função para copiar arquivo dos templates
-function copyConfigFile(filename, description) {
-    const templatePath = path.join(__dirname, 'templates', filename);
-    const targetPath = path.join(process.cwd(), filename);
+function copyConfigFile(templateFile, targetFile, description) {
+    const templatePath = path.join(__dirname, 'templates', templateFile);
+    const targetPath = path.join(process.cwd(), targetFile);
 
     if (fs.existsSync(templatePath)) {
         try {
@@ -35,16 +35,24 @@ function copyConfigFile(filename, description) {
 console.log('📝 Configurando arquivos de configuração...');
 
 // Configurações do Prettier
-copyConfigFile('.prettierrc', 'Prettier');
-copyConfigFile('.prettierignore', 'Prettier ignore');
+copyConfigFile('prettierrc.template', '.prettierrc', 'Prettier');
+copyConfigFile('prettierignore.template', '.prettierignore', 'Prettier ignore');
 
 // Configuração do Git
-copyConfigFile('.gitignore', 'Git ignore');
+copyConfigFile('gitignore.template', '.gitignore', 'Git ignore');
 
 // Configurações do VS Code
 console.log('🔧 Configurando VS Code...');
-copyConfigFile('.vscode/settings.json', 'VS Code settings');
-copyConfigFile('.vscode/extensions.json', 'VS Code extensions');
+copyConfigFile(
+    'vscode-config/settings.json',
+    '.vscode/settings.json',
+    'VS Code settings'
+);
+copyConfigFile(
+    'vscode-config/extensions.json',
+    '.vscode/extensions.json',
+    'VS Code extensions'
+);
 
 // Verificar se está em um repositório Git
 try {
