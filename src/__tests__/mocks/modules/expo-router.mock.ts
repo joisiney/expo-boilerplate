@@ -1,16 +1,20 @@
-import { PropsWithChildren } from "react";
+import {PropsWithChildren} from 'react';
 
 jest.mock('expo-router', () => {
-    const StackComponent = ({children}:PropsWithChildren) => children;
-    StackComponent.Screen = ({children}:PropsWithChildren) => children;
-    
-    const LinkComponent = ({children, ...props}:PropsWithChildren<{href: string; asChild?: boolean}>) => children;
-    
+    const StackComponent = ({children}: PropsWithChildren) => children;
+    StackComponent.Screen = ({children}: PropsWithChildren) => children;
+
+    const LinkComponent = ({
+        children
+    }: PropsWithChildren<{href: string; asChild?: boolean}>) => children;
+
     return {
         useContextKey: () => 'some-fake-key',
         useId: () => 'mocked-id-123',
         Slot: jest.fn(),
-        useLocalSearchParams: jest.fn().mockReturnValue({ presentation: 'modal' }),
+        useLocalSearchParams: jest
+            .fn()
+            .mockReturnValue({presentation: 'modal'}),
         router: {
             push: jest.fn(),
             replace: jest.fn(),
@@ -49,4 +53,4 @@ jest.mock('expo-router', () => {
         Stack: StackComponent,
         Link: LinkComponent
     };
-}); 
+});

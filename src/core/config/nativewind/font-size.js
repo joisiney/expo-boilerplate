@@ -1,4 +1,4 @@
-export const fontSize = {
+const fontSize = {
     // Tamanhos base
     xs: ['12px', {lineHeight: '16px'}],
     sm: ['14px', {lineHeight: '20px'}],
@@ -23,6 +23,7 @@ export const fontSize = {
     title: ['24px', {lineHeight: '32px'}],
     headline: ['30px', {lineHeight: '36px'}],
     display: ['36px', {lineHeight: '40px'}]
-} as const;
+};
 
-export default fontSize;
+module.exports = {fontSize};
+module.exports.default = fontSize;

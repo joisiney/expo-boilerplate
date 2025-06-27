@@ -1,4 +1,4 @@
-export const fontFamily = {
+const fontFamily = {
     DEFAULT: ['Quicksand_400Regular', 'sans-serif'],
     quicksand: {
         regular: ['Quicksand_400Regular', 'sans-serif'],
@@ -20,6 +20,7 @@ export const fontFamily = {
         'Arial',
         'sans-serif'
     ]
-} as const;
+};
 
-export default fontFamily;
+module.exports = {fontFamily};
+module.exports.default = fontFamily;
