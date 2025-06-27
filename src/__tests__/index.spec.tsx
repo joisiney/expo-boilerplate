@@ -1,11 +1,19 @@
 import {JSX} from 'react';
 import Index from '@app/index';
 import {render, screen} from '@testing-library/react-native';
+import {LinguiProvider} from '@/core/config/lingui/provider';
+import {ThemeProvider} from '@/core/config/theme';
 
 const HocMount = (
     props?: Partial<React.ComponentProps<typeof Index>>
 ): JSX.Element => {
-    return <Index {...props} />;
+    return (
+        <ThemeProvider>
+            <LinguiProvider>
+                <Index {...props} />
+            </LinguiProvider>
+        </ThemeProvider>
+    );
 };
 
 describe('Página Index', () => {
@@ -43,6 +51,21 @@ describe('Página Index', () => {
         expect(screen.getByText('🎨 Fonte Quicksand')).toBeTruthy();
         expect(screen.getByText('🧪 Jest + Testing Library')).toBeTruthy();
         expect(screen.getByText('📱 TypeScript')).toBeTruthy();
-        expect(screen.getByText('🎯 ESLint')).toBeTruthy();
+        expect(screen.getByText('🎯 ESLint + Prettier')).toBeTruthy();
+    });
+
+    it('deve exibir o controle de tema', () => {
+        render(<HocMount />);
+
+        expect(screen.getByText('Controle de Tema')).toBeTruthy();
+        expect(screen.getByText(/Tema:/)).toBeTruthy();
+    });
+
+    it('deve exibir a nova funcionalidade de temas', () => {
+        render(<HocMount />);
+
+        expect(
+            screen.getByText('🌙 Sistema de Temas (Light/Dark)')
+        ).toBeTruthy();
     });
 });

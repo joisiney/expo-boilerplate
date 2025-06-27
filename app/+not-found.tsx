@@ -1,22 +1,25 @@
-import {Text, View} from 'react-native';
+import {Text, TouchableOpacity} from 'react-native';
 import {t} from '@lingui/core/macro';
-import {Stack} from 'expo-router';
+import {Link, Stack} from 'expo-router';
+import {ThemedView} from '@/core/config/theme';
 
 export default function NotFoundScreen() {
     return (
         <>
-            <Stack.Screen options={{title: t`Página não encontrada`}} />
-            <View className="flex-1 items-center justify-center p-5 bg-background-secondary">
-                <Text className="text-8xl font-sans-bold text-text-primary mb-4">
-                    404
+            <Stack.Screen options={{title: t`Oops!`}} />
+            <ThemedView className="flex-1 items-center justify-center p-5 bg-background-primary dark:bg-dark-background-primary">
+                <Text className="text-xl font-bold text-text-primary dark:text-dark-text-primary">
+                    {t`Esta página não existe.`}
                 </Text>
-                <Text className="text-2xl font-sans-medium text-text-secondary mb-2">
-                    {t`Página não encontrada`}
-                </Text>
-                <Text className="text-base text-text-tertiary text-center leading-6 font-sans">
-                    {t`A página que você está procurando não existe.`}
-                </Text>
-            </View>
+
+                <Link href="/" asChild>
+                    <TouchableOpacity className="mt-4 py-4 px-6 bg-primary-500 rounded-lg">
+                        <Text className="text-white font-medium text-base">
+                            {t`Voltar para a tela inicial`}
+                        </Text>
+                    </TouchableOpacity>
+                </Link>
+            </ThemedView>
         </>
     );
 }

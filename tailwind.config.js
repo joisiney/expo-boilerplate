@@ -14,6 +14,7 @@ module.exports = {
         // Arquivos na raiz se houver
         './*.{js,jsx,ts,tsx}'
     ],
+    darkMode: 'class',
     presets: [require('nativewind/preset')],
     theme: {
         extend: {
@@ -26,5 +27,11 @@ module.exports = {
     // Configuração específica para desenvolvimento
     mode: 'jit',
     // Garantir que processa arquivos corretamente
-    safelist: ['bg-red-500', 'text-primary-500', 'font-sans-bold']
+    safelist: [
+        'bg-red-500',
+        'text-primary-500',
+        'font-sans-bold',
+        'dark:bg-dark-background-primary',
+        'dark:text-dark-text-primary'
+    ]
 };
