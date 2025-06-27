@@ -11,12 +11,13 @@ import {StatusBar} from 'expo-status-bar';
 import 'react-native-reanimated';
 import '@/core/config/nativewind';
 import {LinguiProvider} from '@/core/config/lingui/provider';
-import {ThemeProvider, useTheme} from '@/core/config/theme';
+import {useNavigationStyles} from '@/core/config/nativewind/navigation-styles';
+import {ThemeProvider} from '@/core/config/theme';
 
 SplashScreen.preventAutoHideAsync();
 
 function RootLayoutContent() {
-    const {effectiveTheme} = useTheme();
+    const navigationStyles = useNavigationStyles();
     const [loaded] = useFonts({
         Quicksand_400Regular,
         Quicksand_500Medium,
@@ -33,20 +34,13 @@ function RootLayoutContent() {
         return null;
     }
 
-    const isDark = effectiveTheme === 'dark';
-
     return (
         <>
             <Stack
                 screenOptions={{
-                    headerStyle: {
-                        backgroundColor: isDark ? '#1E1E1E' : '#FFFFFF'
-                    },
-                    headerTintColor: isDark ? '#FFFFFF' : '#212121',
-                    headerTitleStyle: {
-                        fontWeight: 'bold',
-                        color: isDark ? '#FFFFFF' : '#212121'
-                    }
+                    headerStyle: navigationStyles.headerStyle,
+                    headerTintColor: navigationStyles.headerTintColor,
+                    headerTitleStyle: navigationStyles.headerTitleStyle
                 }}
             >
                 <Stack.Screen
@@ -60,16 +54,14 @@ function RootLayoutContent() {
                     name="+not-found"
                     options={{
                         title: 'Página não encontrada',
-                        headerStyle: {
-                            backgroundColor: isDark ? '#1E1E1E' : '#FFFFFF'
-                        },
-                        headerTintColor: isDark ? '#FFFFFF' : '#212121'
+                        headerStyle: navigationStyles.headerStyle,
+                        headerTintColor: navigationStyles.headerTintColor
                     }}
                 />
             </Stack>
             <StatusBar
-                style={isDark ? 'light' : 'dark'}
-                backgroundColor={isDark ? '#121212' : '#FFFFFF'}
+                style={navigationStyles.statusBarStyle as 'light' | 'dark'}
+                backgroundColor={navigationStyles.statusBarBackground}
             />
         </>
     );
