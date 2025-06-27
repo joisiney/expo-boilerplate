@@ -50,4 +50,7 @@ coverage/
 # IDE
 .cursor/
 
+# Lingui - arquivos gerados automaticamente
+src/core/config/lingui/locales/
+
 app-example

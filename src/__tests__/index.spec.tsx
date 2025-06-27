@@ -29,10 +29,11 @@ describe('Página Index', () => {
         ).toBeTruthy();
     });
 
-    it('deve renderizar o componente SVG', () => {
+    it('deve exibir os botões de idioma', () => {
         render(<HocMount />);
 
-        expect(screen.getByTestId('test-svg')).toBeTruthy();
+        expect(screen.getByText('Português (Brasil)')).toBeTruthy();
+        expect(screen.getByText('English')).toBeTruthy();
     });
 
     it('deve exibir a lista de funcionalidades', () => {

@@ -1,66 +1,63 @@
-import {Text, View} from 'react-native';
-import Svg, {Circle, Path} from 'react-native-svg';
+import {Text, View, TouchableOpacity} from 'react-native';
+import {t} from '@lingui/core/macro';
+import {useLocale} from '@/core/config/lingui/hooks';
 
 export default function Index() {
+    const {changeLocale, availableLocales, currentLocale} = useLocale();
+
     return (
         <View className="flex-1 p-5 bg-background-primary">
-            <View className="items-center mt-15 mb-10">
-                <Text className="text-4xl font-sans-bold text-text-primary mb-2 text-center">
-                    Expo Boilerplate
+            {/* Demonstração básica de tradução */}
+            <View className="items-center mt-10 mb-10 bg-blue-500 p-4">
+                <Text className="text-white text-2xl font-bold text-center">
+                    {t`Expo Boilerplate`}
                 </Text>
-                <Text className="text-base text-text-secondary font-sans text-center">
-                    Um ponto de partida para seus projetos
+                <Text className="text-white text-base text-center mt-2">
+                    {t`Um ponto de partida para seus projetos`}
                 </Text>
             </View>
 
-            <View className="items-center mb-10">
-                <Svg
-                    width="120"
-                    height="120"
-                    viewBox="0 0 100 100"
-                    testID="test-svg"
-                    className="shadow-lg"
-                >
-                    <Circle
-                        cx="50"
-                        cy="50"
-                        r="40"
-                        stroke="#007AFF"
-                        strokeWidth="3"
-                        fill="#E3F2FD"
-                    />
-                    <Path
-                        d="M30 50 L50 30 L70 50 L50 70 Z"
-                        fill="#007AFF"
-                        stroke="#0056CC"
-                        strokeWidth="2"
-                    />
-                </Svg>
+            {/* Botões para trocar idioma */}
+            <View className="bg-green-500 p-4 mb-4">
+                <Text className="text-white font-bold mb-2">
+                    {t`Idioma atual`}: {currentLocale}
+                </Text>
+                <View className="flex-row gap-2">
+                    {availableLocales.map(({code, name}) => (
+                        <TouchableOpacity
+                            key={code}
+                            onPress={() => changeLocale(code)}
+                            className={`p-2 rounded ${
+                                currentLocale === code
+                                    ? 'bg-blue-700'
+                                    : 'bg-blue-500'
+                            }`}
+                        >
+                            <Text className="text-white font-bold">{name}</Text>
+                        </TouchableOpacity>
+                    ))}
+                </View>
             </View>
 
-            <View className="items-center">
-                <Text className="text-lg text-text-primary mb-5 font-sans-medium text-center">
-                    Este é um boilerplate configurado com:
+            {/* Lista de features */}
+            <View className="bg-yellow-400 p-4 mb-4">
+                <Text className="text-black font-bold mb-2">
+                    {t`Este é um boilerplate configurado com:`}
                 </Text>
-                <Text className="text-base text-text-secondary mb-2 font-sans">
-                    ✨ Expo Router
+                <Text className="text-black">{t`✨ Expo Router`}</Text>
+                <Text className="text-black">{t`🎨 Fonte Quicksand`}</Text>
+                <Text className="text-black">
+                    {t`🧪 Jest + Testing Library`}
                 </Text>
-                <Text className="text-base text-text-secondary mb-2 font-sans">
-                    🎨 Fonte Quicksand
-                </Text>
-                <Text className="text-base text-text-secondary mb-2 font-sans">
-                    🧪 Jest + Testing Library
-                </Text>
-                <Text className="text-base text-text-secondary mb-2 font-sans">
-                    📱 TypeScript
-                </Text>
-                <Text className="text-base text-text-secondary mb-2 font-sans">
-                    🎯 ESLint
-                </Text>
-                <Text className="text-base text-text-secondary mb-2 font-sans">
-                    🎨 NativeWind
-                </Text>
+                <Text className="text-black">{t`📱 TypeScript`}</Text>
+                <Text className="text-black">{t`🎯 ESLint`}</Text>
+                <Text className="text-black">{t`🎨 NativeWind`}</Text>
+                <Text className="text-black">{t`🌍 Lingui (i18n)`}</Text>
             </View>
+
+            <Text className="text-text-primary font-sans text-lg text-center">
+                {t`Lingui configurado e funcionando!`} 🌍
+            </Text>
         </View>
     );
 }

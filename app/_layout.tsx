@@ -10,6 +10,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import {StatusBar} from 'expo-status-bar';
 import 'react-native-reanimated';
 import '@/core/config/nativewind';
+import {LinguiProvider} from '@/core/config/lingui/provider';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -31,12 +32,12 @@ export default function RootLayout() {
     }
 
     return (
-        <>
+        <LinguiProvider>
             <Stack>
                 <Stack.Screen name="/" options={{headerShown: false}} />
                 <Stack.Screen name="+not-found" />
             </Stack>
             <StatusBar style="auto" />
-        </>
+        </LinguiProvider>
     );
 }

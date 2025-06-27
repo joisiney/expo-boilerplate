@@ -29,6 +29,20 @@ module.exports = {
         '^@mocks/(.*)$': '<rootDir>/src/__tests__/mocks/$1',
         '^@tests/(.*)$': '<rootDir>/src/__tests__/$1',
 
+        // Mock para mensagens do Lingui
+        'src/core/config/lingui/locales/pt-BR/messages.mjs':
+            '<rootDir>/src/__tests__/mocks/modules/lingui-messages.mock.ts',
+        'src/core/config/lingui/locales/en/messages.mjs':
+            '<rootDir>/src/__tests__/mocks/modules/lingui-messages.mock.ts',
+
+        // Mock para o macro do Lingui
+        '@lingui/core/macro':
+            '<rootDir>/src/__tests__/mocks/modules/lingui-macro.mock.ts',
+
+        // Mock para o hook do Lingui
+        '@lingui/react':
+            '<rootDir>/src/__tests__/mocks/modules/lingui-react.mock.ts',
+
         '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga|css|scss)$':
             '<rootDir>/src/__tests__/mocks/files.mock.ts'
     },
