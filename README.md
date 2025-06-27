@@ -2,6 +2,14 @@
 
 Um boilerplate moderno e bem estruturado para desenvolvimento de aplicações React Native com Expo, incluindo workflow Git automatizado para qualidade de código.
 
+## 🚨 IMPORTANTE PARA CONTRIBUIDORES
+
+> **⚠️ NUNCA edite os arquivos de configuração (`.prettierrc`, `.gitignore`, `.vscode/*`) diretamente no root!**
+>
+> 📁 **Edite apenas os templates em:** `scripts/templates/`  
+> 🔄 **Execute após editar:** `yarn sync-templates`  
+> 📖 **Leia obrigatoriamente:** `scripts/templates/README.md`
+
 ## 🎯 Início Rápido
 
 ### **Usando como Template (Recomendado)**

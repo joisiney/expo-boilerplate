@@ -1,0 +1,29 @@
+# Build outputs
+dist/
+build/
+coverage/
+.expo/
+.expo-shared/
+ios/
+android/
+web-build/
+
+# Dependencies
+node_modules/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+
+# Config files que devem manter formatação específica
+.eslintrc.*
+babel.config.*
+metro.config.*
+
+# Arquivos gerados
+*.min.js
+*.bundle.js
+
+# Documentação que pode ter formatação específica
+CHANGELOG.md 

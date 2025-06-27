@@ -38,6 +38,7 @@
         "prepare": "husky",
         "postinstall": "node scripts/setup-git-hooks.js",
         "setup-git-hooks": "node scripts/setup-git-hooks.js",
+        "sync-templates": "node scripts/sync-templates.js",
         "commitlint": "commitlint --edit"
     },
     "dependencies": {

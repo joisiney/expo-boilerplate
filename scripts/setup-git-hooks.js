@@ -6,13 +6,19 @@ const {execSync} = require('child_process');
 
 console.log('🔧 Configurando projeto...');
 
-// Função para copiar arquivo se existir no template
+// Função para copiar arquivo dos templates
 function copyConfigFile(filename, description) {
-    const templatePath = path.join(__dirname, '..', filename);
+    const templatePath = path.join(__dirname, 'templates', filename);
     const targetPath = path.join(process.cwd(), filename);
 
     if (fs.existsSync(templatePath)) {
         try {
+            // Criar diretório pai se não existir
+            const targetDir = path.dirname(targetPath);
+            if (!fs.existsSync(targetDir)) {
+                fs.mkdirSync(targetDir, {recursive: true});
+            }
+
             const content = fs.readFileSync(templatePath, 'utf8');
             fs.writeFileSync(targetPath, content);
             console.log(`✅ ${description} configurado`);
@@ -37,10 +43,6 @@ copyConfigFile('.gitignore', 'Git ignore');
 
 // Configurações do VS Code
 console.log('🔧 Configurando VS Code...');
-const vscodeDir = path.join(process.cwd(), '.vscode');
-if (!fs.existsSync(vscodeDir)) {
-    fs.mkdirSync(vscodeDir, {recursive: true});
-}
 copyConfigFile('.vscode/settings.json', 'VS Code settings');
 copyConfigFile('.vscode/extensions.json', 'VS Code extensions');
 
