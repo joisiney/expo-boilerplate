@@ -1,7 +1,10 @@
-import { tv } from 'tailwind-variants';
+import { cva, type VariantProps } from 'class-variance-authority';
 
-export const textVariant = tv({
-  base: 'font-sans text-text-primary',
+const cn = (...classes: (string | undefined)[]) => {
+  return classes.filter(Boolean).join(' ');
+};
+
+export const textVariant = cva('font-sans text-text-primary', {
   variants: {
     variant: {
       body: 'font-sans text-base',
@@ -20,4 +23,14 @@ export const textVariant = tv({
     variant: 'body',
     size: 'medium',
   },
-}); 
+});
+
+export const getTextClasses = (
+  variant?: VariantProps<typeof textVariant>['variant'],
+  size?: VariantProps<typeof textVariant>['size'],
+  className?: string
+) => {
+  return cn(textVariant({ variant, size }), className);
+};
+
+export type TextVariantProps = VariantProps<typeof textVariant>; 

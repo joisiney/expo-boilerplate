@@ -42,18 +42,18 @@
 - Evitar `require()` exceto em casos específicos
 - Organizar imports: React → bibliotecas → arquivos locais
 - **NUNCA importar React**: JSX Transform automático configurado
-- **Para types React**: `import { ReactNode } from 'react'`
+- **Para types React**: `import { FC, PropsWithChildren } from 'react'`
 
 ### Exports e Functions
 - **src/app/**: `export default` + `function` permitidos
-- **Atomic Design**: `export const` + arrow functions obrigatório
+- **Atomic Design**: `export const ComponentName: FC<PropsWithChildren<NComponent.Props>>` obrigatório
 - **Exemplos**:
   ```typescript
   // ✅ src/app/index.tsx
   export default function HomePage() { ... }
   
   // ✅ src/atoms/text/text.atom.tsx
-  export const TextAtom = ({ children }: NText.Props) => { ... }
+  export const TextAtom: FC<PropsWithChildren<NText.Props>> = ({ children, ...props }) => { ... }
   ```
 
 ### TypeScript
@@ -63,15 +63,18 @@
 - Preferir `type` para unions simples
 - **Types sempre em namespace prefixado com N**
 - **Arquivo separado com sufixo .types.ts**
+- **Usar FC<PropsWithChildren<>> para componentes com children**
 
 ### Namespaces de Types
 - **Prefixo obrigatório N**: `NButton`, `NUser`, `NApi`
+- **Não incluir children nas Props** (fornecido pelo PropsWithChildren)
 - **Exemplos**:
   ```typescript
   // button.types.ts
   export namespace NButton {
     export interface Props {
       title: string;
+      variant?: Variant;
       onPress: () => void;
     }
     
@@ -132,13 +135,19 @@ export namespace NButton {
 
 ### Arquivo do Componente (.atom.tsx)
 ```typescript
+import { FC, PropsWithChildren } from 'react';
 import { TouchableOpacity, Text } from 'react-native';
 import { NButton } from './button.types';
 
-export const ButtonAtom = ({ title, variant = 'primary', onPress }: NButton.Props) => {
+export const ButtonAtom: FC<PropsWithChildren<NButton.Props>> = ({ 
+  children, 
+  title, 
+  variant = 'primary', 
+  onPress 
+}) => {
   return (
     <TouchableOpacity onPress={onPress}>
-      <Text>{title}</Text>
+      <Text>{title || children}</Text>
     </TouchableOpacity>
   );
 };

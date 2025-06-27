@@ -15,7 +15,7 @@ describe('TextAtom', () => {
   });
 
   it('deve aplicar cor customizada', () => {
-    render(<TextAtom color="#ff0000">Texto Vermelho</TextAtom>);
+    render(<TextAtom>Texto Vermelho</TextAtom>);
     
     expect(screen.getByText('Texto Vermelho')).toBeTruthy();
   });

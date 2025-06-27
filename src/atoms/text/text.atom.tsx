@@ -1,21 +1,20 @@
+import { FC, PropsWithChildren } from 'react';
 import { Text } from 'react-native';
 import { NText } from './text.types';
-import { textVariant } from './text.variant';
+import { getTextClasses } from './text.variant';
 
-export const TextAtom = ({ 
+export const TextAtom: FC<PropsWithChildren<NText.Props>> = ({ 
   children, 
   variant = 'body', 
-  color,
   size = 'medium',
   className = '',
   ...props
-}: NText.Props) => {
-  const variantClasses = textVariant({ variant, size });
+}) => {
+  const classes = getTextClasses(variant, size, className);
 
   return (
     <Text 
-      className={`${variantClasses} ${className}`}
-      style={color ? { color } : undefined}
+      className={classes}
       {...props}
     >
       {children}

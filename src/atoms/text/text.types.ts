@@ -1,15 +1,8 @@
-import { ReactNode } from 'react';
 import { TextProps } from 'react-native';
+import { TextVariantProps } from './text.variant';
 
 export namespace NText {
-  export interface Props extends Omit<TextProps, 'style'> {
-    children: ReactNode;
-    variant?: Variant;
-    color?: string;
-    size?: Size;
+  export interface Props extends Omit<TextProps, 'style'>, TextVariantProps {
     className?: string;
   }
-  
-  export type Variant = 'body' | 'heading' | 'caption' | 'label';
-  export type Size = 'small' | 'medium' | 'large' | 'xlarge';
 } 
