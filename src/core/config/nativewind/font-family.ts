@@ -1,4 +1,5 @@
 export const fontFamily = {
+  DEFAULT: ['Quicksand_400Regular', 'sans-serif'],
   quicksand: {
     regular: ['Quicksand_400Regular', 'sans-serif'],
     medium: ['Quicksand_500Medium', 'sans-serif'],

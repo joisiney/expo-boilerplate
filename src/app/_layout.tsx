@@ -8,7 +8,6 @@ import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
-import { Text } from 'react-native';
 import 'react-native-reanimated';
 import '../core/config/nativewind/global.css';
 
@@ -30,12 +29,6 @@ export default function RootLayout() {
   if (!loaded) {
     return null;
   }
-
-  (Text as any).defaultProps = (Text as any).defaultProps || {};
-  (Text as any).defaultProps.style = [
-    { fontFamily: 'Quicksand_400Regular' },
-    (Text as any).defaultProps.style,
-  ];
 
   return (
     <>

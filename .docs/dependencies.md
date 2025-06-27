@@ -13,6 +13,7 @@
 - `expo-status-bar` - Barra de status
 - `expo-splash-screen` - Splash screen
 - `react-native-svg` - Componentes SVG
+- `tailwind-variants` - Gerenciamento de variantes para Tailwind
 
 ### Testes
 - `jest` - Framework de testes
@@ -38,6 +39,7 @@
 - `expo-router` → `expo-router.mock.ts`
 - `expo-splash-screen` → `expo-splash-screen.mock.ts`
 - `react-native-svg` → `react-native-svg.mock.ts`
+- `tailwind-variants` → `tailwind-variants.mock.ts`
 - Arquivos estáticos → `files.mock.ts`
 
 ## ⚠️ Dependências Peer

@@ -6,6 +6,7 @@
 @layer base {
   * {
     box-sizing: border-box;
+    font-family: 'Quicksand_400Regular', system-ui, -apple-system, sans-serif;
   }
   
   html {
@@ -19,6 +20,7 @@
     padding: 0;
     background-color: #ffffff;
     color: #212121;
+    font-family: 'Quicksand_400Regular', system-ui, -apple-system, sans-serif;
   }
 }
 
