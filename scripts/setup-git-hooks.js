@@ -35,6 +35,15 @@ copyConfigFile('.prettierignore', 'Prettier ignore');
 // Configuração do Git
 copyConfigFile('.gitignore', 'Git ignore');
 
+// Configurações do VS Code
+console.log('🔧 Configurando VS Code...');
+const vscodeDir = path.join(process.cwd(), '.vscode');
+if (!fs.existsSync(vscodeDir)) {
+    fs.mkdirSync(vscodeDir, {recursive: true});
+}
+copyConfigFile('.vscode/settings.json', 'VS Code settings');
+copyConfigFile('.vscode/extensions.json', 'VS Code extensions');
+
 // Verificar se está em um repositório Git
 try {
     execSync('git rev-parse --git-dir', {stdio: 'ignore'});
@@ -138,6 +147,8 @@ console.log('📋 Configurações aplicadas:');
 console.log('  • .prettierrc: Configuração do Prettier');
 console.log('  • .prettierignore: Arquivos ignorados pelo Prettier');
 console.log('  • .gitignore: Arquivos ignorados pelo Git');
+console.log('  • .vscode/settings.json: Configurações do VS Code');
+console.log('  • .vscode/extensions.json: Extensões recomendadas do VS Code');
 console.log('  • Git hooks: pre-commit, commit-msg, pre-push');
 console.log('');
 console.log(

@@ -97,6 +97,7 @@ yarn install
 >
 > - **Git hooks** (pre-commit, commit-msg, pre-push)
 > - **Prettier** (.prettierrc, .prettierignore)
+> - **VS Code** (settings.json, extensions.json)
 > - **Git ignore** (.gitignore)
 > - **Repositório Git** (se necessário)
 

@@ -36,4 +36,4 @@ Alterações aplicadas automaticamente pelo pre-push hook:
     echo "✅ Commit automático realizado"
 fi
 
-echo "🚀 Pre-push concluído com sucesso!" 
+echo "🚀 Pre-push concluído com sucesso!"
