@@ -1,62 +1,164 @@
-# 🚀 Expo Boilerplate
+# 🚀 Expo Boilerplate (WIP)
 
-Um boilerplate moderno e bem estruturado para desenvolvimento de aplicações React Native com Expo.
+Um boilerplate moderno e bem estruturado para desenvolvimento de aplicações React Native com Expo, incluindo workflow Git automatizado para qualidade de código.
+
+## 🎯 Início Rápido
+
+### **Usando como Template (Recomendado)**
+
+Crie um novo projeto baseado neste boilerplate:
+
+```bash
+# Usando URL completa
+npx create-expo-app@latest MeuApp --template https://github.com/joisiney/expo-boilerplate
+
+# Ou usando sintaxe curta
+npx create-expo-app@latest MeuApp --template joisiney/expo-boilerplate
+```
+
+### **Clonagem Manual**
+
+```bash
+git clone https://github.com/joisiney/expo-boilerplate.git MeuApp
+cd MeuApp
+yarn install
+yarn start
+```
 
 ## ✨ Funcionalidades
+
+### **Desenvolvimento**
 
 - **Expo SDK 53** - Framework moderno para desenvolvimento React Native
 - **Expo Router** - Navegação baseada em arquivos
 - **TypeScript** - Tipagem estática para melhor desenvolvimento
+- **NativeWind** - Tailwind CSS para React Native
+- **Lingui** - Internacionalização (i18n) configurada
 - **Fonte Quicksand** - Tipografia moderna e elegante
+
+### **Qualidade de Código**
+
+- **ESLint + Prettier** - Formatação e linting automáticos
+- **Husky** - Git hooks automatizados
+- **lint-staged** - Linting apenas em arquivos modificados
+- **Commitlint** - Validação de mensagens de commit
 - **Jest + Testing Library** - Testes unitários e de componentes
-- **ESLint** - Linting para qualidade de código
-- **Cobertura de testes** - Relatórios de cobertura configurados
+
+### **Workflow Git Automatizado**
+
+- **Pre-commit**: Formata código automaticamente
+- **Commit-msg**: Valida mensagens seguindo Conventional Commits
+- **Pre-push**: Executa TypeScript, lint, testes e faz commit automático para lint fixes
 
 ## 📦 Estrutura do Projeto
 
 ```
-src/
-├── app/                    # Rotas do Expo Router
-│   ├── _layout.tsx        # Layout principal
-│   ├── index.tsx          # Página inicial
-│   ├── +not-found.tsx     # Página 404
-│   └── *.spec.tsx         # Testes das páginas
-├── __tests__/             # Configurações de teste
-│   ├── mocks/             # Mocks para testes
-│   └── setup.ts           # Setup dos testes
-assets/
-├── fonts/                 # Fontes customizadas
-└── images/                # Imagens e ícones
+├── app/                        # Rotas do Expo Router
+│   ├── _layout.tsx            # Layout principal
+│   ├── index.tsx              # Página inicial
+│   └── +not-found.tsx         # Página 404
+├── src/
+│   ├── __tests__/             # Configurações de teste
+│   │   ├── mocks/             # Mocks para testes
+│   │   └── setup.ts           # Setup dos testes
+│   ├── @types/                # Definições de tipos
+│   ├── atoms/                 # Componentes atômicos
+│   ├── molecules/             # Componentes moleculares
+│   ├── organisms/             # Componentes complexos
+│   ├── features/              # Features da aplicação
+│   ├── particles/             # Elementos básicos (cores, espaçamentos)
+│   └── core/                  # Configurações centrais
+│       ├── config/
+│       │   ├── lingui/        # Configuração i18n
+│       │   └── nativewind/    # Configuração Tailwind
+├── docs/                      # Documentação
+│   └── git-workflow.md        # Guia do workflow Git
+├── .husky/                    # Git hooks
+├── .lintstagedrc.js          # Configuração lint-staged
+└── commitlint.config.js      # Configuração commitlint
 ```
 
-## 🛠️ Instalação
+## 🛠️ Instalação e Configuração
 
-1. Clone o repositório:
-```bash
-git clone <url-do-repositorio>
-cd expo-boilerplate
-```
+### **1. Após criar o projeto:**
 
-2. Instale as dependências:
 ```bash
+cd MeuApp
 yarn install
 ```
 
-3. Inicie o projeto:
+### **2. Configurar Git (se necessário):**
+
+```bash
+# Se não foi criado com template, configure os hooks
+yarn prepare
+```
+
+### **3. Iniciar desenvolvimento:**
+
 ```bash
 yarn start
 ```
 
 ## 📱 Scripts Disponíveis
 
+### **Desenvolvimento**
+
 - `yarn start` - Inicia o Expo development server
 - `yarn android` - Abre no emulador Android
 - `yarn ios` - Abre no simulador iOS
 - `yarn web` - Abre no navegador web
+
+### **Qualidade de Código**
+
+- `yarn lint` - Verifica problemas de linting
+- `yarn lint:fix` - Corrige problemas de linting automaticamente
+- `yarn format` - Formata código com Prettier
+- `yarn tsc` - Verifica tipos TypeScript
+
+### **Testes**
+
 - `yarn test` - Executa os testes
 - `yarn test:watch` - Executa os testes em modo watch
 - `yarn test:coverage` - Executa os testes com relatório de cobertura
-- `yarn lint` - Executa o linting do código
+
+### **Internacionalização**
+
+- `yarn i18n:extract` - Extrai strings para tradução
+- `yarn i18n:compile` - Compila traduções
+
+## 🔧 Workflow Git
+
+Este boilerplate inclui um workflow Git automatizado que garante qualidade de código:
+
+### **Hooks Configurados:**
+
+- **Pre-commit**: Formata código e corrige linting automaticamente
+- **Commit-msg**: Valida mensagens seguindo [Conventional Commits](https://www.conventionalcommits.org/)
+- **Pre-push**: Executa verificações completas (TypeScript, lint, testes)
+
+### **Tipos de Commit Suportados:**
+
+```bash
+feat: nova funcionalidade
+fix: correção de bug
+docs: documentação
+style: formatação
+refactor: refatoração
+perf: melhoria de performance
+test: testes
+chore: tarefas gerais
+```
+
+### **Exemplo de Uso:**
+
+```bash
+git add .
+git commit -m "feat: adicionar tela de login"
+git push # Executa todas as verificações automaticamente
+```
+
+📖 **Documentação completa**: [Git Workflow Guide](docs/git-workflow.md)
 
 ## 🧪 Testes
 
@@ -64,52 +166,62 @@ O projeto inclui uma configuração completa de testes com:
 
 - **Jest** como runner de testes
 - **Testing Library** para testes de componentes React Native
-- **Mocks** configurados para Expo Router e React Native SVG
+- **Mocks** configurados para Expo Router, React Native SVG, etc.
 - **Cobertura de código** com relatórios detalhados
 
-Para executar os testes:
 ```bash
-yarn test
-```
-
-Para ver a cobertura:
-```bash
-yarn test:coverage
+yarn test              # Executar testes
+yarn test:coverage     # Ver cobertura
 ```
 
 ## 🎨 Customização
 
-### Fontes
-As fontes Quicksand estão pré-configuradas em três pesos:
+### **Cores e Temas (NativeWind)**
+
+Configuração em `src/core/config/nativewind/`:
+
+- `colors.ts` - Paleta de cores
+- `font-family.ts` - Famílias de fontes
+- `font-size.ts` - Tamanhos de fonte
+
+### **Internacionalização**
+
+Configuração em `src/core/config/lingui/`:
+
+- Suporte a múltiplos idiomas
+- Extração automática de strings
+- Hot reload de traduções
+
+### **Fontes**
+
+Fontes Quicksand pré-configuradas:
+
 - Quicksand-Regular
-- Quicksand-Medium  
+- Quicksand-Medium
 - Quicksand-Bold
-
-### Cores e Estilos
-O projeto usa uma paleta de cores moderna e minimalista. Você pode personalizar os estilos nos arquivos de componentes.
-
-## 📝 Padrões de Desenvolvimento
-
-- **Componentes funcionais** com hooks
-- **TypeScript** para tipagem
-- **Testes unitários** para cada componente
-- **Estrutura de arquivos** organizada por funcionalidade
-- **Linting** para manter qualidade do código
 
 ## 🚀 Deploy
 
-Este boilerplate está pronto para deploy nas seguintes plataformas:
+Este boilerplate está pronto para deploy:
 
 - **Expo Application Services (EAS)**
 - **App Store** (iOS)
 - **Google Play Store** (Android)
 - **Web** (através do Expo for Web)
 
+```bash
+# Configurar EAS
+eas build:configure
+
+# Build para produção
+eas build --platform all
+```
+
 ## 🤝 Contribuindo
 
 1. Faça um fork do projeto
 2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
-3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+3. Commit suas mudanças (`git commit -m 'feat: add amazing feature'`)
 4. Push para a branch (`git push origin feature/AmazingFeature`)
 5. Abra um Pull Request
 
@@ -121,13 +233,24 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 
 Após configurar o boilerplate, você pode:
 
-1. Adicionar navegação em tabs
-2. Implementar autenticação
-3. Configurar gerenciamento de estado (Redux, Zustand, etc.)
-4. Adicionar mais telas e funcionalidades
-5. Configurar push notifications
-6. Implementar analytics
+1. **Configurar autenticação** com Expo AuthSession
+2. **Adicionar navegação em tabs** com Expo Router
+3. **Implementar gerenciamento de estado** (Zustand, Redux Toolkit)
+4. **Configurar push notifications** com Expo Notifications
+5. **Adicionar analytics** com Expo Analytics
+6. **Implementar deep linking** com Expo Linking
+7. **Configurar splash screen** personalizada
+
+## 🔗 Links Úteis
+
+- [Expo Documentation](https://docs.expo.dev/)
+- [Expo Router](https://expo.github.io/router/)
+- [NativeWind](https://www.nativewind.dev/)
+- [Lingui Documentation](https://lingui.js.org/)
+- [Conventional Commits](https://www.conventionalcommits.org/)
 
 ---
+
+⭐ **Se este boilerplate te ajudou, deixe uma estrela no repositório!**
 
 Feito com ❤️ para acelerar o desenvolvimento de apps com Expo!
