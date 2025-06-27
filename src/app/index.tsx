@@ -62,13 +62,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#1a1a1a',
     marginBottom: 8,
-    fontFamily: 'Quicksand-Bold',
+    fontFamily: 'Quicksand_700Bold',
     textAlign: 'center',
   },
   subtitle: {
     fontSize: 16,
     color: '#666',
-    fontFamily: 'Quicksand-Regular',
+    fontFamily: 'Quicksand_400Regular',
     textAlign: 'center',
   },
   iconContainer: {
@@ -92,13 +92,13 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: '#333',
     marginBottom: 20,
-    fontFamily: 'Quicksand-Medium',
+    fontFamily: 'Quicksand_500Medium',
     textAlign: 'center',
   },
   feature: {
     fontSize: 16,
     color: '#555',
     marginBottom: 8,
-    fontFamily: 'Quicksand-Regular',
+    fontFamily: 'Quicksand_400Regular',
   },
 });

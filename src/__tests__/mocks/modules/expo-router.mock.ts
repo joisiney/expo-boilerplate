@@ -1,4 +1,3 @@
-// Mock para expo-router
 jest.mock('expo-router', () => {
     const StackComponent = (props: { children?: React.ReactNode }) => props.children;
     StackComponent.Screen = (props: { children?: React.ReactNode }) => props.children;

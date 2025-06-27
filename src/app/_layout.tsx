@@ -1,4 +1,9 @@
-import { useFonts } from 'expo-font';
+import {
+  Quicksand_400Regular,
+  Quicksand_500Medium,
+  Quicksand_700Bold,
+  useFonts,
+} from '@expo-google-fonts/quicksand';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
@@ -6,14 +11,13 @@ import { useEffect } from 'react';
 import { Text } from 'react-native';
 import 'react-native-reanimated';
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const [loaded] = useFonts({
-    'Quicksand-Regular': require('../../assets/fonts/Quicksand-Regular.ttf'),
-    'Quicksand-Bold': require('../../assets/fonts/Quicksand-Bold.ttf'),
-    'Quicksand-Medium': require('../../assets/fonts/Quicksand-Medium.ttf'),
+    Quicksand_400Regular,
+    Quicksand_500Medium,
+    Quicksand_700Bold,
   });
 
   useEffect(() => {
@@ -26,10 +30,9 @@ export default function RootLayout() {
     return null;
   }
 
-  // Set default font for all Text components
   (Text as any).defaultProps = (Text as any).defaultProps || {};
   (Text as any).defaultProps.style = [
-    { fontFamily: 'Quicksand-Regular' },
+    { fontFamily: 'Quicksand_400Regular' },
     (Text as any).defaultProps.style,
   ];
 

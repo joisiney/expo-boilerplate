@@ -1,4 +1,3 @@
-// Mock para react-native-svg
 jest.mock('react-native-svg', () => {
   const React = require('react');
   const { View } = require('react-native');
