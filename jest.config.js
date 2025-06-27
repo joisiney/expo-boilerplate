@@ -26,6 +26,7 @@ module.exports = {
     '^@app/(.*)$': '<rootDir>/app/$1',
     '^@mocks/(.*)$': '<rootDir>/src/__tests__/mocks/$1',
     '^@tests/(.*)$': '<rootDir>/src/__tests__/$1',
+
     '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga|css|scss)$': '<rootDir>/src/__tests__/mocks/files.mock.ts'
   },
   transformIgnorePatterns: [

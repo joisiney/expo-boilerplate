@@ -1,31 +1,7 @@
 import '@testing-library/jest-native/extend-expect';
 import './utils/auto-import-modules';
 
-// Mock react-native-svg
-jest.mock('react-native-svg', () => ({
-  __esModule: true,
-  default: 'Svg',
-  Svg: 'Svg',
-  Circle: 'Circle',
-  Ellipse: 'Ellipse',
-  G: 'G',
-  Text: 'Text',
-  TSpan: 'TSpan',
-  TextPath: 'TextPath',
-  Path: 'Path',
-  Polygon: 'Polygon',
-  Polyline: 'Polyline',
-  Line: 'Line',
-  Rect: 'Rect',
-  Use: 'Use',
-  Image: 'Image',
-  Symbol: 'Symbol',
-  Defs: 'Defs',
-  LinearGradient: 'LinearGradient',
-  RadialGradient: 'RadialGradient',
-  Stop: 'Stop',
-  ClipPath: 'ClipPath',
-  Pattern: 'Pattern',
-  Mask: 'Mask'
-}));
+// Importa os mocks dos módulos
+import './mocks/modules/global-css.mock';
+import './mocks/modules/react-native-svg.mock';
 

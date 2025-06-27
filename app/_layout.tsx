@@ -1,4 +1,4 @@
-// Importa o CSS global apenas quando não estamos executando testes
+import '@/core/config/nativewind/global.css';
 import {
   Quicksand_400Regular,
   Quicksand_500Medium,
@@ -10,9 +10,6 @@ import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
-if (process.env.NODE_ENV !== 'test') {
-  import('@/core/config/nativewind/global.css');
-}
 
 SplashScreen.preventAutoHideAsync();
 
