@@ -1,5 +1,5 @@
 import './global.css';
 
-export * from './colors';
-export * from './font-family';
-export * from './font-size';
+export * from './colors.js';
+export * from './font-family.js';
+export * from './font-size.js';
