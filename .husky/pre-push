@@ -1,0 +1,39 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Verificar se há alterações antes do lint
+git diff --quiet --exit-code
+CHANGES_BEFORE=$?
+
+# Executar verificações
+echo "🔍 Executando verificações pre-push..."
+
+echo "📝 Verificando TypeScript..."
+yarn tsc
+
+echo "🔧 Executando lint fix..."
+yarn lint:fix
+
+echo "✅ Verificando lint..."
+yarn lint
+
+echo "🧪 Executando testes..."
+yarn test
+
+# Verificar se houve alterações após o lint fix
+git diff --quiet --exit-code
+CHANGES_AFTER=$?
+
+# Se houve alterações e não havia antes, fazer commit automático
+if [ $CHANGES_BEFORE -eq 0 ] && [ $CHANGES_AFTER -ne 0 ]; then
+    echo "🔧 Lint fix aplicou alterações. Fazendo commit automático..."
+    git add .
+    git commit -m "style: aplicar lint fix automático
+
+Alterações aplicadas automaticamente pelo pre-push hook:
+- Formatação de código com Prettier
+- Correções de ESLint"
+    echo "✅ Commit automático realizado"
+fi
+
+echo "🚀 Pre-push concluído com sucesso!" 
