@@ -1,6 +1,6 @@
-import { colors } from './colors.js';
-import { fontFamily } from './font-family.js';
-import { fontSize } from './font-size.js';
+import { colors } from './colors';
+import { fontFamily } from './font-family';
+import { fontSize } from './font-size';
 
 /** @type {import('tailwindcss').Config} */
 export default {

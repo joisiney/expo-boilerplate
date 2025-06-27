@@ -1,3 +1,4 @@
+// Importa o CSS global apenas quando não estamos executando testes
 import {
   Quicksand_400Regular,
   Quicksand_500Medium,
@@ -9,7 +10,9 @@ import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
-import '../core/config/nativewind/global.css';
+if (process.env.NODE_ENV !== 'test') {
+  import('@/core/config/nativewind/global.css');
+}
 
 SplashScreen.preventAutoHideAsync();
 
@@ -33,7 +36,7 @@ export default function RootLayout() {
   return (
     <>
       <Stack>
-        <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen name="/" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
       </Stack>
       <StatusBar style="auto" />

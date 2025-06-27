@@ -1,6 +1,6 @@
+import NotFoundScreen from '@app/+not-found';
 import { render, screen } from '@testing-library/react-native';
 import { JSX } from 'react';
-import NotFoundScreen from './+not-found';
 
 const HocMount = (props?: Partial<React.ComponentProps<typeof NotFoundScreen>>): JSX.Element => {
   return <NotFoundScreen {...props} />;

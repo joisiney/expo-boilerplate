@@ -12,11 +12,14 @@
       "@/*": [
         "./src/*"
       ],
+      "@app/*": [
+        "./app/*"
+      ],
       "@mocks/*": [
-        "./src/_tests/mocks/*"
+        "./src/__tests__/mocks/*"
       ],
       "@tests/*": [
-        "./src/_tests/*"
+        "./src/__tests__/*"
       ]
     }
   },

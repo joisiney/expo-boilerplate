@@ -1,6 +1,6 @@
+import RootLayout from '@app/_layout';
 import { render } from '@testing-library/react-native';
 import { JSX } from 'react';
-import RootLayout from './_layout';
 
 import * as QuicksandFonts from '@expo-google-fonts/quicksand';
 import * as ExpoSplashScreen from 'expo-splash-screen';

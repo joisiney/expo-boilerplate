@@ -4,6 +4,8 @@ jest.mock('expo-router', () => {
     const StackComponent = ({children}:PropsWithChildren) => children;
     StackComponent.Screen = ({children}:PropsWithChildren) => children;
     
+    const LinkComponent = ({children, ...props}:PropsWithChildren<{href: string; asChild?: boolean}>) => children;
+    
     return {
         useContextKey: () => 'some-fake-key',
         useId: () => 'mocked-id-123',
@@ -44,6 +46,7 @@ jest.mock('expo-router', () => {
         }),
         useFocusEffect: jest.fn(),
         usePathname: jest.fn(),
-        Stack: StackComponent
+        Stack: StackComponent,
+        Link: LinkComponent
     };
 }); 

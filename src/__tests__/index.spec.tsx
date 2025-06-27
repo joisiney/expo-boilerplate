@@ -1,6 +1,6 @@
+import Index from '@app/index';
 import { render, screen } from '@testing-library/react-native';
 import { JSX } from 'react';
-import Index from './index';
 
 const HocMount = (props?: Partial<React.ComponentProps<typeof Index>>): JSX.Element => {
   return <Index {...props} />;
