@@ -1,10 +1,9 @@
 import {Text, View} from 'react-native';
 import Svg, {Circle, Path} from 'react-native-svg';
-import TextAtom from '@/atoms/text';
 
 export default function Index() {
     return (
-        <View className="flex-1 p-5 bg-red-500">
+        <View className="flex-1 p-5 bg-background-primary">
             <View className="items-center mt-15 mb-10">
                 <Text className="text-4xl font-sans-bold text-text-primary mb-2 text-center">
                     Expo Boilerplate
@@ -12,9 +11,6 @@ export default function Index() {
                 <Text className="text-base text-text-secondary font-sans text-center">
                     Um ponto de partida para seus projetos
                 </Text>
-                <TextAtom className="text-red-500 bg-orange-300 p-5">
-                    Hello World
-                </TextAtom>
             </View>
 
             <View className="items-center mb-10">
