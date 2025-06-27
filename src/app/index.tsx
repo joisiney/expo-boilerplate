@@ -1,20 +1,24 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import Svg, { Circle, Path } from "react-native-svg";
 
 export default function Index() {
-  return <View style={styles.container}>
-    <View style={styles.header}>
-      <Text style={styles.title}>Expo Boilerplate</Text>
-      <Text style={styles.subtitle}>Um ponto de partida para seus projetos</Text>
+  return <View className="flex-1 bg-background-secondary p-5">
+    <View className="items-center mt-15 mb-10">
+      <Text className="text-4xl font-sans-bold text-text-primary mb-2 text-center">
+        Expo Boilerplate
+      </Text>
+      <Text className="text-base text-text-secondary font-sans text-center">
+        Um ponto de partida para seus projetos
+      </Text>
     </View>
     
-    <View style={styles.iconContainer}>
+    <View className="items-center mb-10">
       <Svg
         width="120"
         height="120"
         viewBox="0 0 100 100"
         testID="test-svg"
-        style={styles.logo}
+        className="shadow-lg"
       >
         <Circle
           cx="50"
@@ -33,72 +37,16 @@ export default function Index() {
       </Svg>
     </View>
     
-    <View style={styles.content}>
-      <Text style={styles.description}>
+    <View className="items-center">
+      <Text className="text-lg text-text-primary mb-5 font-sans-medium text-center">
         Este é um boilerplate configurado com:
       </Text>
-      <Text style={styles.feature}>✨ Expo Router</Text>
-      <Text style={styles.feature}>🎨 Fonte Quicksand</Text>
-      <Text style={styles.feature}>🧪 Jest + Testing Library</Text>
-      <Text style={styles.feature}>📱 TypeScript</Text>
-      <Text style={styles.feature}>🎯 ESLint</Text>
+      <Text className="text-base text-text-secondary mb-2 font-sans">✨ Expo Router</Text>
+      <Text className="text-base text-text-secondary mb-2 font-sans">🎨 Fonte Quicksand</Text>
+      <Text className="text-base text-text-secondary mb-2 font-sans">🧪 Jest + Testing Library</Text>
+      <Text className="text-base text-text-secondary mb-2 font-sans">📱 TypeScript</Text>
+      <Text className="text-base text-text-secondary mb-2 font-sans">🎯 ESLint</Text>
+      <Text className="text-base text-text-secondary mb-2 font-sans">🎨 NativeWind</Text>
     </View>
   </View>
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#f8f9fa',
-    padding: 20,
-  },
-  header: {
-    alignItems: 'center',
-    marginTop: 60,
-    marginBottom: 40,
-  },
-  title: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    color: '#1a1a1a',
-    marginBottom: 8,
-    fontFamily: 'Quicksand_700Bold',
-    textAlign: 'center',
-  },
-  subtitle: {
-    fontSize: 16,
-    color: '#666',
-    fontFamily: 'Quicksand_400Regular',
-    textAlign: 'center',
-  },
-  iconContainer: {
-    alignItems: 'center',
-    marginBottom: 40,
-  },
-  logo: {
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-  content: {
-    alignItems: 'center',
-  },
-  description: {
-    fontSize: 18,
-    color: '#333',
-    marginBottom: 20,
-    fontFamily: 'Quicksand_500Medium',
-    textAlign: 'center',
-  },
-  feature: {
-    fontSize: 16,
-    color: '#555',
-    marginBottom: 8,
-    fontFamily: 'Quicksand_400Regular',
-  },
-});

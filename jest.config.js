@@ -20,9 +20,13 @@ module.exports = {
   coverageDirectory: 'src/__tests__/coverage',
   coverageReporters: ['text', 'lcov', 'html'],
   moduleNameMapper: {
-    '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$': '<rootDir>/src/__tests__/mocks/files.mock.ts'
+    '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$': '<rootDir>/src/__tests__/mocks/files.mock.ts',
+    '\\.css$': 'identity-obj-proxy'
   },
   transformIgnorePatterns: [
-    'node_modules/(?!(react-native|@react-native|expo|@expo|@testing-library|react-native-svg))'
-  ]
+    'node_modules/(?!(react-native|@react-native|expo|@expo|@testing-library|react-native-svg|nativewind))'
+  ],
+  transform: {
+    '^.+\\.(ts|tsx|js|jsx)$': ['babel-jest', { configFile: './babel.config.test.js' }]
+  }
 }; 

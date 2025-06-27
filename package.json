@@ -19,6 +19,7 @@
     "expo-router": "~5.1.1",
     "expo-splash-screen": "~0.30.9",
     "expo-status-bar": "~2.2.3",
+    "nativewind": "^4.1.23",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "react-native": "0.79.4",
@@ -38,9 +39,11 @@
     "@types/react": "^19.1.8",
     "eslint": "^9.29.0",
     "eslint-config-expo": "^9.2.0",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "^30.0.3",
     "jest-expo": "^53.0.7",
     "react-test-renderer": "19.0.0",
+    "tailwindcss": "^4.1.11",
     "typescript": "~5.8.3"
   },
   "private": true

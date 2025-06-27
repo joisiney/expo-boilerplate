@@ -1,51 +1,65 @@
-import { StyleSheet, Text } from 'react-native';
+import { Text } from 'react-native';
 import { NText } from './text.types';
 
 export const TextAtom = ({ 
   children, 
   variant = 'body', 
-  color = '#1a1a1a',
-  size = 'medium' 
+  color,
+  size = 'medium',
+  className = '',
+  ...props
 }: NText.Props) => {
+  const getVariantClass = () => {
+    switch (variant) {
+      case 'heading':
+        return 'font-sans-bold';
+      case 'caption':
+        return 'font-sans opacity-70';
+      case 'label':
+        return 'font-sans-medium';
+      default:
+        return 'font-sans';
+    }
+  };
+
+  const getSizeClass = () => {
+    switch (size) {
+      case 'small':
+        return 'text-xs';
+      case 'large':
+        return 'text-xl';
+      case 'xlarge':
+        return 'text-2xl';
+      default:
+        return 'text-base';
+    }
+  };
+
+  const getColorClass = () => {
+    if (color) return '';
+    
+    switch (variant) {
+      case 'caption':
+        return 'text-text-secondary';
+      default:
+        return 'text-text-primary';
+    }
+  };
+
+  const combinedClassName = [
+    getVariantClass(),
+    getSizeClass(),
+    getColorClass(),
+    className
+  ].filter(Boolean).join(' ');
+
   return (
-    <Text style={[
-      styles.base,
-      styles[variant],
-      styles[size],
-      { color }
-    ]}>
+    <Text 
+      className={combinedClassName}
+      style={color ? { color } : undefined}
+      {...props}
+    >
       {children}
     </Text>
   );
-};
-
-const styles = StyleSheet.create({
-  base: {
-    fontFamily: 'Quicksand_400Regular',
-  },
-  body: {
-    fontFamily: 'Quicksand_400Regular',
-  },
-  heading: {
-    fontFamily: 'Quicksand_700Bold',
-  },
-  caption: {
-    fontFamily: 'Quicksand_400Regular',
-    opacity: 0.7,
-  },
-  label: {
-    fontFamily: 'Quicksand_500Medium',
-  },
-  small: {
-    fontSize: 12,
-  },
-  medium: {
-    fontSize: 16,
-  },
-  large: {
-    fontSize: 20,
-  },
-  xlarge: {
-    fontSize: 24,
-  },
-}); 
+}; 

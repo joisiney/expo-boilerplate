@@ -10,6 +10,7 @@ import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import { Text } from 'react-native';
 import 'react-native-reanimated';
+import '../core/config/nativewind/global.css';
 
 SplashScreen.preventAutoHideAsync();
 
