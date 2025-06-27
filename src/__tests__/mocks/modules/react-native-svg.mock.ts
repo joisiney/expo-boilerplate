@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 jest.mock('react-native-svg', () => {
-  const React = require('react');
+  const { createElement } = require('react');
   const { View } = require('react-native');
 
   const createMockComponent = (name: string) => {
-    const MockComponent = (props: any) => React.createElement(View, props);
+    const MockComponent = (props: any) => createElement(View, props);
     MockComponent.displayName = name;
     return MockComponent;
   };

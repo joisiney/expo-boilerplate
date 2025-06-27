@@ -35,6 +35,13 @@ Lista de dependências, configurações importantes e o que evitar.
 - **Evitar `any` e `require()`**
 - **Seguir padrões TypeScript**
 - **NUNCA colocar comentários no código**
+- **Nomes sempre em dash-case**
+- **Sempre usar sufixos (.atom, .mock, .types)**
+- **Atomic Design obrigatório**
+- **Types em namespace prefixado com N**
+- **src/app: export default + function**
+- **Atomic Design: export const + arrow function**
+- **NUNCA importar React (JSX Transform automático)**
 
 ---
 

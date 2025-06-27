@@ -10,6 +10,7 @@ function requireContext(directory: string, useSubdirectories: boolean = false, r
     files.forEach((file) => {
       if (regExp.test(file)) {
         try {
+          // eslint-disable-next-line @typescript-eslint/no-require-imports
           require(join(modulesPath, file));
         } catch (error) {
           console.warn(`❌ Erro ao carregar mock ${file}:`, error);

@@ -9,6 +9,15 @@ expo-boilerplate/
 │   │   ├── _layout.tsx        # Layout principal
 │   │   ├── index.tsx          # Página inicial
 │   │   └── +not-found.tsx     # Página 404
+│   ├── atoms/                  # Componentes atômicos
+│   │   └── button/
+│   │       ├── button.atom.tsx
+│   │       ├── button.types.ts
+│   │       └── index.ts
+│   ├── molecules/              # Componentes moleculares
+│   ├── organisms/              # Componentes organismos
+│   ├── particles/              # Componentes partículas
+│   ├── features/               # Features completas
 │   └── __tests__/             # Configuração de testes
 │       ├── setup.ts           # Setup do Jest
 │       ├── utils/             # Utilitários de teste
@@ -18,34 +27,54 @@ expo-boilerplate/
 └── package.json
 ```
 
-## 📱 Padrões de Componentes
+## 📱 Padrões de Componentes (Atomic Design)
 
-### Estrutura de um Componente
+### Estrutura de um Atom
 ```typescript
+// button.types.ts
+export namespace NButton {
+  export interface Props {
+    title: string;
+    variant?: Variant;
+    onPress: () => void;
+  }
+  
+  export type Variant = 'primary' | 'secondary';
+}
+
+// button.atom.tsx
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, TouchableOpacity, Text } from 'react-native';
+import { NButton } from './button.types';
 
-interface Props {
-  title: string;
-  onPress?: () => void;
-}
-
-export default function ComponentName({ title, onPress }: Props) {
+export const ButtonAtom = ({ title, variant = 'primary', onPress }: NButton.Props) => {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={[styles.container, styles[variant]]} onPress={onPress}>
       <Text style={styles.title}>{title}</Text>
-    </View>
+    </TouchableOpacity>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    padding: 16,
+    borderRadius: 8,
+  },
+  primary: {
+    backgroundColor: '#007AFF',
+  },
+  secondary: {
+    backgroundColor: '#6C757D',
   },
   title: {
     fontFamily: 'Quicksand_400Regular',
+    color: 'white',
   },
 });
+
+// index.ts
+export { ButtonAtom as default } from './button.atom';
+export * from './button.types';
 ```
 
 ## 🧪 Padrão de Testes

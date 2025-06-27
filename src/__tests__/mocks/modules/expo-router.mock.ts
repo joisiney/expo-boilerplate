@@ -1,6 +1,8 @@
+import { PropsWithChildren } from "react";
+
 jest.mock('expo-router', () => {
-    const StackComponent = (props: { children?: React.ReactNode }) => props.children;
-    StackComponent.Screen = (props: { children?: React.ReactNode }) => props.children;
+    const StackComponent = ({children}:PropsWithChildren) => children;
+    StackComponent.Screen = ({children}:PropsWithChildren) => children;
     
     return {
         useContextKey: () => 'some-fake-key',
