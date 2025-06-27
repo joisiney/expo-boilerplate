@@ -5,19 +5,25 @@
 ```
 expo-boilerplate/
 ├── src/
+│   ├── @types/                 # Tipos globais TypeScript
+│   │   └── standards.d.ts      # TWithTestID e outros padrões
 │   ├── app/                    # Páginas (Expo Router)
 │   │   ├── _layout.tsx        # Layout principal
 │   │   ├── index.tsx          # Página inicial
 │   │   └── +not-found.tsx     # Página 404
 │   ├── atoms/                  # Componentes atômicos
-│   │   └── button/
-│   │       ├── button.atom.tsx
-│   │       ├── button.types.ts
+│   │   └── text/
+│   │       ├── text.atom.tsx
+│   │       ├── text.types.ts
+│   │       ├── text.variant.ts
 │   │       └── index.ts
 │   ├── molecules/              # Componentes moleculares
 │   ├── organisms/              # Componentes organismos
 │   ├── particles/              # Componentes partículas
 │   ├── features/               # Features completas
+│   ├── core/                   # Configurações centrais
+│   │   └── config/
+│   │       └── nativewind/     # Configuração NativeWind
 │   └── __tests__/             # Configuração de testes
 │       ├── setup.ts           # Setup do Jest
 │       ├── utils/             # Utilitários de teste
@@ -31,50 +37,74 @@ expo-boilerplate/
 
 ### Estrutura de um Atom
 ```typescript
-// button.types.ts
-export namespace NButton {
-  export interface Props {
-    title: string;
+// text.types.ts
+export namespace NText {
+  export interface Props extends TWithTestID {
     variant?: Variant;
-    onPress: () => void;
+    size?: Size;
+    className?: string;
   }
   
-  export type Variant = 'primary' | 'secondary';
+  export type Variant = 'body' | 'heading' | 'caption' | 'label';
+  export type Size = 'small' | 'medium' | 'large' | 'xlarge';
 }
 
-// button.atom.tsx
-import React from 'react';
-import { StyleSheet, TouchableOpacity, Text } from 'react-native';
-import { NButton } from './button.types';
+// text.variant.ts
+import { cva, type VariantProps } from 'class-variance-authority';
 
-export const ButtonAtom = ({ title, variant = 'primary', onPress }: NButton.Props) => {
-  return (
-    <TouchableOpacity style={[styles.container, styles[variant]]} onPress={onPress}>
-      <Text style={styles.title}>{title}</Text>
-    </TouchableOpacity>
-  );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 16,
-    borderRadius: 8,
+export const textVariant = cva('font-sans text-text-primary', {
+  variants: {
+    variant: {
+      body: 'font-sans text-base',
+      heading: 'font-sans-bold text-lg',
+      caption: 'font-sans text-sm text-text-secondary opacity-70',
+      label: 'font-sans-medium text-base',
+    },
+    size: {
+      small: 'text-xs',
+      medium: 'text-base',
+      large: 'text-xl',
+      xlarge: 'text-2xl',
+    },
   },
-  primary: {
-    backgroundColor: '#007AFF',
-  },
-  secondary: {
-    backgroundColor: '#6C757D',
-  },
-  title: {
-    fontFamily: 'Quicksand_400Regular',
-    color: 'white',
+  defaultVariants: {
+    variant: 'body',
+    size: 'medium',
   },
 });
 
+export type TextVariantProps = VariantProps<typeof textVariant>;
+
+// text.atom.tsx
+import { FC, PropsWithChildren } from 'react';
+import { Text } from 'react-native';
+import { NText } from './text.types';
+import { getTextClasses } from './text.variant';
+
+export const TextAtom: FC<PropsWithChildren<NText.Props>> = ({ 
+  children, 
+  variant = 'body', 
+  size = 'medium',
+  className = '',
+  testID,
+  ...props
+}) => {
+  const classes = getTextClasses(variant, size, className);
+
+  return (
+    <Text 
+      className={classes}
+      testID={testID}
+      {...props}
+    >
+      {children}
+    </Text>
+  );
+};
+
 // index.ts
-export { ButtonAtom as default } from './button.atom';
-export * from './button.types';
+export { TextAtom as default } from './text.atom';
+export * from './text.types';
 ```
 
 ## 🧪 Padrão de Testes
@@ -86,7 +116,8 @@ import ComponentName from './ComponentName';
 
 describe('ComponentName', () => {
   it('deve renderizar corretamente', () => {
-    render(<ComponentName title="Test" />);
+    render(<ComponentName testID="component-test">Test</ComponentName>);
+    expect(screen.getByTestId('component-test')).toBeTruthy();
     expect(screen.getByText('Test')).toBeTruthy();
   });
 });
@@ -118,6 +149,11 @@ export const spacing = {
 
 ## 🔧 Configurações Importantes
 
+### TypeScript Global Types
+- Pasta `src/@types/` para tipos globais
+- Configuração automática via `tsconfig.json` typeRoots
+- `TWithTestID` obrigatório em todos os componentes
+
 ### Jest
 - Auto-import de mocks via `utils/auto-import-modules.ts`
 - Coverage em `src/__tests__/coverage/`
@@ -126,4 +162,9 @@ export const spacing = {
 ### Expo Router
 - Navegação baseada em arquivos
 - Layout principal em `_layout.tsx`
-- Páginas em `src/app/` 
+- Páginas em `src/app/`
+
+### NativeWind
+- Configuração em `src/core/config/nativewind/`
+- Class Variance Authority para variantes
+- Fonte padrão Quicksand configurada globalmente 
