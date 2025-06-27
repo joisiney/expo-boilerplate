@@ -10,6 +10,8 @@ web-build/
 expo-env.d.ts
 
 # Native
+ios/
+android/
 .kotlin/
 *.orig.*
 *.jks
@@ -17,6 +19,11 @@ expo-env.d.ts
 *.p12
 *.key
 *.mobileprovision
+
+# Lock files
+yarn.lock
+package-lock.json
+pnpm-lock.yaml
 
 # Metro
 .metro-health-check*
