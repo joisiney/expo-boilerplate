@@ -1,27 +1,32 @@
 import { render, screen } from '@testing-library/react-native';
+import { JSX } from 'react';
 import NotFoundScreen from './+not-found';
+
+const HocMount = (props?: Partial<React.ComponentProps<typeof NotFoundScreen>>): JSX.Element => {
+  return <NotFoundScreen {...props} />;
+};
 
 describe('Página 404', () => {
   it('deve renderizar corretamente', () => {
-    const component = render(<NotFoundScreen />);
+    const component = render(<HocMount />);
     
     expect(component).toBeTruthy();
   });
 
   it('deve exibir o título 404', () => {
-    render(<NotFoundScreen />);
+    render(<HocMount />);
     
     expect(screen.getByText('404')).toBeTruthy();
   });
 
   it('deve exibir a mensagem de página não encontrada', () => {
-    render(<NotFoundScreen />);
+    render(<HocMount />);
     
     expect(screen.getByText('Página não encontrada')).toBeTruthy();
   });
 
   it('deve exibir a descrição explicativa', () => {
-    render(<NotFoundScreen />);
+    render(<HocMount />);
     
     expect(screen.getByText('A página que você está procurando não existe.')).toBeTruthy();
   });

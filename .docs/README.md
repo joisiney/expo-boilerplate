@@ -10,6 +10,9 @@ Padrões de código, estrutura de arquivos, testes, fontes, imports, TypeScript 
 ### 🏗️ [architecture.md](./architecture.md) 
 Arquitetura do projeto, estrutura de componentes, padrões de teste e sistema de design.
 
+### 🧪 [testing-patterns.md](./testing-patterns.md)
+Padrões de teste, HocMount, estrutura de arquivos de teste e boas práticas.
+
 ### 📦 [dependencies.md](./dependencies.md)
 Lista de dependências, configurações importantes e o que evitar.
 
@@ -29,7 +32,7 @@ Lista de dependências, configurações importantes e o que evitar.
 ## ⚡ Regras de Ouro
 
 - **Máximo 200-300 linhas por arquivo**
-- **Sempre criar testes (.spec.tsx)**
+- **Sempre criar testes (.spec.tsx) com HocMount**
 - **Usar @expo-google-fonts/quicksand para fontes**
 - **Mocks em src/__tests__/mocks/modules/**
 - **Evitar `any` e `require()`**
@@ -42,6 +45,8 @@ Lista de dependências, configurações importantes e o que evitar.
 - **src/app: export default + function**
 - **Atomic Design: export const + arrow function**
 - **NUNCA importar React (JSX Transform automático)**
+- **TWithTestID obrigatório em todos os componentes**
+- **HocMount obrigatório em todos os testes**
 
 ---
 

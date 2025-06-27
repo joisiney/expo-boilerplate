@@ -1,33 +1,38 @@
 import { render, screen } from '@testing-library/react-native';
+import { JSX } from 'react';
 import Index from './index';
+
+const HocMount = (props?: Partial<React.ComponentProps<typeof Index>>): JSX.Element => {
+  return <Index {...props} />;
+};
 
 describe('Página Index', () => {
   it('deve renderizar corretamente', () => {
-    const component = render(<Index />);
+    const component = render(<HocMount />);
     
     expect(component).toBeTruthy();
   });
 
   it('deve exibir o título do boilerplate', () => {
-    render(<Index />);
+    render(<HocMount />);
     
     expect(screen.getByText('Expo Boilerplate')).toBeTruthy();
   });
 
   it('deve exibir o subtítulo', () => {
-    render(<Index />);
+    render(<HocMount />);
     
     expect(screen.getByText('Um ponto de partida para seus projetos')).toBeTruthy();
   });
 
   it('deve renderizar o componente SVG', () => {
-    render(<Index />);
+    render(<HocMount />);
     
     expect(screen.getByTestId('test-svg')).toBeTruthy();
   });
 
   it('deve exibir a lista de funcionalidades', () => {
-    render(<Index />);
+    render(<HocMount />);
     
     expect(screen.getByText('✨ Expo Router')).toBeTruthy();
     expect(screen.getByText('🎨 Fonte Quicksand')).toBeTruthy();
