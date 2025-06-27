@@ -80,25 +80,49 @@ yarn start
 
 ## 🛠️ Instalação e Configuração
 
-### **1. Após criar o projeto:**
+### **1. Criar projeto com template:**
 
 ```bash
+npx create-expo-app@latest MeuApp --template joisiney/expo-boilerplate
 cd MeuApp
+```
+
+### **2. Instalar dependências:**
+
+```bash
 yarn install
 ```
 
-### **2. Configurar Git (se necessário):**
+> 🎉 **Configuração Automática**: O script `postinstall` configura automaticamente todos os Git hooks (pre-commit, commit-msg, pre-push) após a instalação!
+
+### **3. Configuração manual (se necessário):**
+
+Se por algum motivo os hooks não foram configurados automaticamente, execute:
 
 ```bash
-# Se não foi criado com template, configure os hooks
-yarn prepare
+yarn setup-git-hooks
 ```
 
-### **3. Iniciar desenvolvimento:**
+### **4. Iniciar desenvolvimento:**
 
 ```bash
 yarn start
 ```
+
+### **✅ Verificar se está funcionando:**
+
+Teste o workflow fazendo um commit:
+
+```bash
+git add .
+git commit -m "feat: testar workflow git"
+```
+
+Se tudo estiver configurado, você verá:
+
+- ✅ Pre-commit executando lint-staged
+- ✅ Commit-msg validando a mensagem
+- ✅ Mensagem de commit aceita
 
 ## 📱 Scripts Disponíveis
 

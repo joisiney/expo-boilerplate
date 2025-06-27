@@ -23,7 +23,8 @@ export default [
             'public/charting_library/**',
             '**/*.d.ts',
             'babel-plugin-auto-catch-async.js',
-            'app.config.js'
+            'app.config.js',
+            'scripts/**'
         ]
     },
     {
