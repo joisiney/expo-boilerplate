@@ -1,16 +1,6 @@
 import { render, screen } from '@testing-library/react-native';
 import NotFoundScreen from './+not-found';
 
-// Mock do expo-router
-jest.mock('expo-router', () => {
-  const StackComponent = ({ children }: any) => children;
-  StackComponent.Screen = ({ children }: any) => children;
-  
-  return {
-    Stack: StackComponent,
-  };
-});
-
 describe('Página 404', () => {
   it('deve renderizar corretamente', () => {
     const component = render(<NotFoundScreen />);
