@@ -36,7 +36,7 @@
         "clear": "watchman watch-del-all && rm -rf ios && rm -rf android && rm -rf .expo",
         "clear:metro": "rm -rf /tmp/metro-cache && rm -rf node_modules/.cache",
         "prepare": "husky",
-        "postinstall": "node scripts/setup-git-hooks.js",
+        "postinstall": "node scripts/setup-git-hooks.js && yarn i18n:extract-compile",
         "setup-git-hooks": "node scripts/setup-git-hooks.js",
         "sync-templates": "node scripts/sync-templates.js",
         "commitlint": "commitlint --edit"

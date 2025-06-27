@@ -107,6 +107,7 @@ yarn install
 > - **Prettier** (.prettierrc, .prettierignore)
 > - **VS Code** (settings.json, extensions.json)
 > - **Git ignore** (.gitignore)
+> - **Lingui i18n** (extração e compilação de traduções)
 > - **Repositório Git** (se necessário)
 
 ### **3. Configuração manual (se necessário):**

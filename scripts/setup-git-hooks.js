@@ -160,6 +160,7 @@ console.log('  • .gitignore: Arquivos ignorados pelo Git');
 console.log('  • .vscode/settings.json: Configurações do VS Code');
 console.log('  • .vscode/extensions.json: Extensões recomendadas do VS Code');
 console.log('  • Git hooks: pre-commit, commit-msg, pre-push');
+console.log('  • Lingui i18n: Extraindo e compilando traduções...');
 console.log('');
 console.log(
     '🚀 Agora você pode fazer commits seguindo o padrão Conventional Commits!'
