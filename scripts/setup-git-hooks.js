@@ -1,10 +1,39 @@
 #!/usr/bin/env node
 
-const {execSync} = require('child_process');
 const fs = require('fs');
 const path = require('path');
+const {execSync} = require('child_process');
 
-console.log('🔧 Configurando Git hooks...');
+console.log('🔧 Configurando projeto...');
+
+// Função para copiar arquivo se existir no template
+function copyConfigFile(filename, description) {
+    const templatePath = path.join(__dirname, '..', filename);
+    const targetPath = path.join(process.cwd(), filename);
+
+    if (fs.existsSync(templatePath)) {
+        try {
+            const content = fs.readFileSync(templatePath, 'utf8');
+            fs.writeFileSync(targetPath, content);
+            console.log(`✅ ${description} configurado`);
+        } catch (error) {
+            console.log(
+                `⚠️  Erro ao configurar ${description}:`,
+                error.message
+            );
+        }
+    }
+}
+
+// Configurar arquivos de configuração do projeto
+console.log('📝 Configurando arquivos de configuração...');
+
+// Configurações do Prettier
+copyConfigFile('.prettierrc', 'Prettier');
+copyConfigFile('.prettierignore', 'Prettier ignore');
+
+// Configuração do Git
+copyConfigFile('.gitignore', 'Git ignore');
 
 // Verificar se está em um repositório Git
 try {
@@ -103,12 +132,13 @@ fs.chmodSync(prePushPath, '755');
 console.log('✅ Hook pre-push configurado');
 
 console.log('');
-console.log('🎉 Git hooks configurados com sucesso!');
+console.log('🎉 Projeto configurado com sucesso!');
 console.log('');
-console.log('📋 Hooks configurados:');
-console.log('  • pre-commit: Executa lint-staged');
-console.log('  • commit-msg: Valida mensagens de commit');
-console.log('  • pre-push: Executa verificações completas + commit automático');
+console.log('📋 Configurações aplicadas:');
+console.log('  • .prettierrc: Configuração do Prettier');
+console.log('  • .prettierignore: Arquivos ignorados pelo Prettier');
+console.log('  • .gitignore: Arquivos ignorados pelo Git');
+console.log('  • Git hooks: pre-commit, commit-msg, pre-push');
 console.log('');
 console.log(
     '🚀 Agora você pode fazer commits seguindo o padrão Conventional Commits!'

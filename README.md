@@ -93,11 +93,16 @@ cd MeuApp
 yarn install
 ```
 
-> 🎉 **Configuração Automática**: O script `postinstall` configura automaticamente todos os Git hooks (pre-commit, commit-msg, pre-push) após a instalação!
+> 🎉 **Configuração Automática**: O script `postinstall` configura automaticamente:
+>
+> - **Git hooks** (pre-commit, commit-msg, pre-push)
+> - **Prettier** (.prettierrc, .prettierignore)
+> - **Git ignore** (.gitignore)
+> - **Repositório Git** (se necessário)
 
 ### **3. Configuração manual (se necessário):**
 
-Se por algum motivo os hooks não foram configurados automaticamente, execute:
+Se por algum motivo as configurações não foram aplicadas automaticamente, execute:
 
 ```bash
 yarn setup-git-hooks
@@ -150,6 +155,42 @@ Se tudo estiver configurado, você verá:
 
 - `yarn i18n:extract` - Extrai strings para tradução
 - `yarn i18n:compile` - Compila traduções
+
+## 🔧 Configurações Incluídas
+
+Este boilerplate inclui configurações pré-definidas para garantir consistência e qualidade:
+
+### **Prettier (.prettierrc)**
+
+```json
+{
+    "semi": true,
+    "singleQuote": true,
+    "tabWidth": 4,
+    "trailingComma": "none",
+    "printWidth": 80,
+    "bracketSpacing": false,
+    "arrowParens": "always",
+    "endOfLine": "lf"
+}
+```
+
+### **Git Ignore (.gitignore)**
+
+- Arquivos de dependências (node_modules)
+- Builds e dist (ios/, android/, .expo/, web-build/)
+- Arquivos de debug e logs
+- Arquivos de ambiente local
+- Cobertura de testes
+- Arquivos específicos do macOS e IDEs
+
+### **Prettier Ignore (.prettierignore)**
+
+- Arquivos de build e distribuição
+- Arquivos de configuração que devem manter formatação específica
+- Documentação com formatação especial
+
+Todas essas configurações são aplicadas automaticamente quando você usa o template!
 
 ## 🔧 Workflow Git
 
