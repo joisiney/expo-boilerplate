@@ -98,7 +98,7 @@ export default [
             ],
             'unused-imports/no-unused-imports': 'error',
             'unused-imports/no-unused-vars': [
-                'warn',
+                'error',
                 {
                     vars: 'all',
                     varsIgnorePattern: '^_',
@@ -151,7 +151,7 @@ export default [
             'prefer-const': 'error',
             'no-var': 'error',
             'no-unused-vars': [
-                'warn',
+                'error',
                 {
                     vars: 'all',
                     varsIgnorePattern: '^_',
