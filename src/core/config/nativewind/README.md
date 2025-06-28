@@ -1,6 +1,6 @@
 # NativeWind Configuration
 
-Este diretório contém as configurações do NativeWind (Tailwind CSS para React Native).
+Este diretório contém as configurações do NativeWind (Tailwind CSS para React Native) e integração com twrnc.
 
 ## 📁 Estrutura
 
@@ -8,183 +8,201 @@ Este diretório contém as configurações do NativeWind (Tailwind CSS para Reac
 - `font-family.js` - Configurações de fontes
 - `font-size.js` - Tamanhos de fonte
 - `global.css` - Estilos globais e componentes
-- `index.ts` - Exportações principais
+- `index.ts` - API principal com hooks e funções utilitárias
+- `README.md` - Esta documentação
 
-## 🎨 Sistema de Cores
+## 🎨 Sistema Híbrido: NativeWind + twrnc
 
-### Cores Principais
+### Por que usar ambos?
 
-```js
-// Cores do sistema
-primary: { 50: '#E3F2FD', ..., 900: '#002952' }
-secondary: { 50: '#F5F5F5', ..., 900: '#212121' }
-success: { 50: '#E8F5E8', ..., 900: '#1B5E20' }
-warning: { 50: '#FFF8E1', ..., 900: '#FF6F00' }
-error: { 50: '#FFEBEE', ..., 900: '#B71C1C' }
-```
+- **NativeWind**: Para componentes React Native com `className`
+- **twrnc**: Para React Navigation e objetos `style` complexos
 
-### Cores Semânticas (Light Mode)
+## 🚀 API Principal (`index.ts`)
 
-```js
-background: {
-  primary: '#FFFFFF',    // Fundo principal
-  secondary: '#F8F9FA',  // Fundo secundário
-  tertiary: '#F1F3F4'    // Fundo terciário
-}
-
-text: {
-  primary: '#212121',    // Texto principal
-  secondary: '#757575',  // Texto secundário
-  tertiary: '#9E9E9E',   // Texto terciário
-  inverse: '#FFFFFF'     // Texto inverso
-}
-
-border: {
-  light: '#E0E0E0',      // Borda clara
-  medium: '#BDBDBD',     // Borda média
-  dark: '#757575'        // Borda escura
-}
-
-surface: {
-  primary: '#FFFFFF',    // Superfície principal
-  secondary: '#F5F5F5',  // Superfície secundária
-  elevated: '#FFFFFF'    // Superfície elevada
-}
-```
-
-### Cores Semânticas (Dark Mode)
-
-```js
-dark: {
-  background: {
-    primary: '#121212',   // Fundo principal escuro
-    secondary: '#1E1E1E', // Fundo secundário escuro
-    tertiary: '#2D2D2D'   // Fundo terciário escuro
-  },
-
-  text: {
-    primary: '#FFFFFF',   // Texto principal claro
-    secondary: '#B3B3B3', // Texto secundário claro
-    tertiary: '#8A8A8A',  // Texto terciário claro
-    inverse: '#000000'    // Texto inverso escuro
-  },
-
-  border: {
-    light: '#404040',     // Borda clara escura
-    medium: '#666666',    // Borda média escura
-    dark: '#8A8A8A'       // Borda escura
-  },
-
-  surface: {
-    primary: '#1E1E1E',   // Superfície principal escura
-    secondary: '#2D2D2D', // Superfície secundária escura
-    elevated: '#333333'   // Superfície elevada escura
-  }
-}
-```
-
-## 🚀 Como Usar
-
-### Classes Básicas
+### **Template Literal `tw`**
 
 ```tsx
-// Fundos
-className = 'bg-background-primary dark:bg-dark-background-primary';
-className = 'bg-surface-secondary dark:bg-dark-surface-secondary';
+// Estilos básicos com dark mode automático
+const headerStyle = tw`bg-background-primary dark:bg-dark-background-secondary`;
+const textStyle = tw`text-lg font-bold text-text-primary dark:text-dark-text-primary`;
 
-// Textos
-className = 'text-text-primary dark:text-dark-text-primary';
-className = 'text-text-secondary dark:text-dark-text-secondary';
-
-// Bordas
-className = 'border-border-light dark:border-dark-border-light';
+// Estilos condicionais
+const dynamicStyle = tw`p-4 rounded-lg ${condition ? 'bg-red-500' : 'bg-blue-500'}`;
 ```
 
-### Componentes com Tema
+### **Hook `useClassNameToColor`**
+
+Hook reativo que converte classes Tailwind em cores com suporte automático a dark mode:
 
 ```tsx
-import {ThemedView} from '@/core/config/theme';
+import {useClassNameToColor} from '@/core/config/nativewind';
 
 function MyComponent() {
+    // Cores que atualizam automaticamente com o tema
+    const textColor = useClassNameToColor(
+        'text-text-primary dark:text-dark-text-primary'
+    );
+    const bgColor = useClassNameToColor(
+        'bg-background-primary dark:bg-dark-background-primary'
+    );
+
     return (
-        <ThemedView className="bg-background-primary dark:bg-dark-background-primary">
-            <Text className="text-text-primary dark:text-dark-text-primary">
-                Conteúdo que responde ao tema
-            </Text>
-        </ThemedView>
+        <View style={{backgroundColor: bgColor}}>
+            <Text style={{color: textColor}}>Texto reativo</Text>
+        </View>
     );
 }
 ```
 
-### Botões Temáticos
+### **Funções Utilitárias**
 
 ```tsx
-// Botão primário
-<TouchableOpacity className="bg-primary-500 px-4 py-2 rounded-lg">
-  <Text className="text-white font-medium">Botão Primário</Text>
-</TouchableOpacity>
+// Obter colorScheme atual (não reativo)
+const currentScheme = getColorScheme(); // 'light' | 'dark'
 
-// Botão com tema
-<TouchableOpacity className="bg-surface-secondary dark:bg-dark-surface-secondary border border-border-light dark:border-dark-border-light px-4 py-2 rounded-lg">
-  <Text className="text-text-primary dark:text-dark-text-primary font-medium">
-    Botão Temático
-  </Text>
-</TouchableOpacity>
+// Verificar se está em dark mode (não reativo)
+const darkMode = isDark(); // boolean
+
+// Extrair cor de classe (não reativo)
+const color = getColor('text-blue-600 dark:text-blue-400'); // string
 ```
 
-## ⚠️ Regras Importantes
-
-1. **NUNCA** use cores hardcoded no código (ex: `#FFFFFF`, `#000000`)
-2. **SEMPRE** use as classes do sistema de cores
-3. **SEMPRE** inclua a variante dark: `dark:bg-dark-*`
-4. **EDITE** apenas o arquivo `colors.js` para alterar cores
-5. **USE** o `ThemedView` como container principal
-
-## 🔧 Adicionando Novas Cores
-
-Para adicionar novas cores, edite apenas o arquivo `colors.js`:
-
-```js
-// Em colors.js
-const colors = {
-    // ... cores existentes
-
-    // Nova cor personalizada
-    custom: {
-        primary: '#FF5722',
-        secondary: '#FFC107'
-    },
-
-    // Versão dark da nova cor
-    dark: {
-        // ... cores dark existentes
-        custom: {
-            primary: '#D84315',
-            secondary: '#FF8F00'
-        }
-    }
-};
-```
-
-Depois use no código:
+## 📋 **Exemplo Completo - React Navigation**
 
 ```tsx
-className = 'bg-custom-primary dark:bg-dark-custom-primary';
+// app/_layout.tsx
+import {tw, useClassNameToColor} from '@/core/config/nativewind';
+
+function RootLayoutContent() {
+    // Estilos reativos usando tw template literal
+    const headerStyle = tw`bg-background-primary dark:bg-dark-background-secondary`;
+    const headerTitleStyle = tw`font-bold text-text-primary dark:text-dark-text-primary`;
+
+    // Cores reativas usando hook
+    const headerTintColor = useClassNameToColor(
+        'text-text-primary dark:text-dark-text-primary'
+    );
+    const statusBarBg = useClassNameToColor(
+        'bg-background-primary dark:bg-dark-background-primary'
+    );
+
+    return (
+        <>
+            <Stack
+                screenOptions={{
+                    headerStyle,
+                    headerTitleStyle,
+                    headerTintColor
+                }}
+            >
+                <Stack.Screen name="index" options={{title: 'Home'}} />
+            </Stack>
+            <StatusBar backgroundColor={statusBarBg} />
+        </>
+    );
+}
 ```
 
-## 🎨 Classes Pré-definidas
+## 📋 **Exemplo Completo - Componentes**
 
-O arquivo `global.css` inclui classes de componentes prontas:
+```tsx
+import {View, Text} from 'react-native';
+import {tw, useClassNameToColor} from '@/core/config/nativewind';
 
-- `.btn-primary` - Botão primário
-- `.btn-secondary` - Botão secundário
-- `.card` - Card com tema
-- `.input-field` - Campo de input temático
-- `.text-heading` - Texto de cabeçalho
-- `.text-body` - Texto de corpo
-- `.text-caption` - Texto de legenda
+export default function MyScreen() {
+    // Hook reativo para cores específicas
+    const borderColor = useClassNameToColor(
+        'border-border-light dark:border-dark-border-light'
+    );
 
-## 🧪 Testando Cores
+    return (
+        <View className="flex-1 bg-background-primary dark:bg-dark-background-primary">
+            {/* NativeWind para componentes normais */}
+            <Text className="text-xl font-bold text-text-primary dark:text-dark-text-primary">
+                Título com dark mode automático
+            </Text>
 
-Execute `yarn test` para garantir que as cores não quebram os testes.
-Execute `npx expo start` para testar visualmente no app.
+            {/* twrnc para estilos complexos */}
+            <View
+                style={[
+                    tw`p-4 rounded-lg bg-surface-primary dark:bg-dark-surface-primary`,
+                    {borderColor, borderWidth: 1}
+                ]}
+            >
+                <Text className="text-center text-text-secondary dark:text-dark-text-secondary">
+                    Híbrido: className + style
+                </Text>
+            </View>
+        </View>
+    );
+}
+```
+
+## 🎯 **Casos de Uso**
+
+### ✅ **Use NativeWind (`className`) quando:**
+
+- Componentes React Native normais
+- Precisa de performance máxima
+- Quer dark mode automático simples
+- Estilos estáticos
+
+### ✅ **Use twrnc (`tw`) quando:**
+
+- React Navigation (headers, tabs)
+- Objetos `style` complexos
+- Estilos condicionais dinâmicos
+- Combinação com outros estilos
+
+### ✅ **Use `useClassNameToColor` quando:**
+
+- Precisa extrair cores específicas
+- React Navigation que exige cores brutas
+- Componentes que precisam de cores reativas
+- StatusBar, bordas, etc.
+
+## 🔧 **Configurações**
+
+### NativeWind (principal)
+
+- Arquivo: `tailwind.config.js`
+- Suporte completo a dark mode
+- Otimizado para performance
+
+### twrnc (auxiliar)
+
+- Arquivo: `tailwind-twrnc.config.js`
+- Configuração simplificada
+- Sem conflitos com NativeWind
+
+## ⚠️ **Regras Importantes**
+
+1. **NativeWind PRIMEIRO**: Sempre prefira `className` quando possível
+2. **tw para casos específicos**: Use `tw` quando `className` não funciona
+3. **useClassNameToColor para cores**: Use o hook quando precisar de cores reativas
+4. **Cores centralizadas**: Ambos usam o mesmo `colors.js`
+5. **Configurações separadas**: Evita conflitos entre os sistemas
+6. **Reatividade automática**: Hooks atualizam automaticamente com tema
+
+## 🧪 **Testando**
+
+```bash
+# Testes unitários
+yarn test
+
+# Testar visualmente
+npx expo start
+```
+
+## 📚 **Resumo da API**
+
+| Função/Hook           | Tipo             | Reativo | Uso                              |
+| --------------------- | ---------------- | ------- | -------------------------------- |
+| `tw`                  | Template literal | ✅      | Estilos com dark mode automático |
+| `useClassNameToColor` | Hook             | ✅      | Extrair cores reativas           |
+| `getColorScheme`      | Função           | ❌      | Obter tema atual                 |
+| `isDark`              | Função           | ❌      | Verificar dark mode              |
+| `getColor`            | Função           | ❌      | Extrair cor não reativa          |
+
+**Regra de ouro**: Use versões reativas (hooks) em componentes, versões não reativas fora de componentes.
