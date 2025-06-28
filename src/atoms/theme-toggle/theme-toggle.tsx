@@ -1,7 +1,7 @@
 import React from 'react';
 import {TouchableOpacity, Text} from 'react-native';
 import {t} from '@lingui/core/macro';
-import {useTheme, useThemedStyles} from '@/core/config/theme';
+import {useTheme} from '@/core/config/theme';
 
 interface ThemeToggleProps {
     className?: string;
@@ -9,7 +9,6 @@ interface ThemeToggleProps {
 
 export function ThemeToggle({className = ''}: ThemeToggleProps) {
     const {theme, effectiveTheme, toggleTheme} = useTheme();
-    const styles = useThemedStyles();
 
     const getThemeIcon = () => {
         if (theme === 'light') return '☀️';
