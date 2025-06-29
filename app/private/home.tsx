@@ -10,8 +10,31 @@ import {
 import {useSuspenseQuery} from '@tanstack/react-query';
 import {router} from 'expo-router';
 import {Button} from '@/atoms/button';
+import {ThemeToggle} from '@/atoms/theme-toggle';
 import {useAuth} from '@/core/config/auth';
+import {useTheme} from '@/core/config/theme';
 import {api, type Post} from '@/core/services/api';
+
+// Componente para debug do tema
+function ThemeDebug() {
+    const {theme, effectiveTheme} = useTheme();
+
+    return (
+        <View className="bg-blue-100 dark:bg-blue-900 p-3 rounded-lg mb-4 border border-blue-300 dark:border-blue-700">
+            <Text className="text-blue-800 dark:text-blue-200 font-medium text-sm">
+                🔧 Debug Tema:
+            </Text>
+            <Text className="text-blue-700 dark:text-blue-300 text-xs">
+                Configurado: {theme} | Ativo: {effectiveTheme}
+            </Text>
+            <View className="mt-2 p-2 bg-white dark:bg-gray-800 rounded">
+                <Text className="text-gray-900 dark:text-gray-100 text-xs">
+                    Este texto deve mudar de cor conforme o tema
+                </Text>
+            </View>
+        </View>
+    );
+}
 
 // Componente para exibir dados do usuário
 function UserProfile() {
@@ -128,15 +151,25 @@ export default function PrivateHomeScreen() {
                 <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
             }
         >
-            {/* Header */}
+            {/* Header com Theme Toggle */}
             <View className="mb-6">
-                <Text className="text-2xl font-bold text-text-primary dark:text-dark-text-primary mb-2">
-                    Olá, {user?.name}! 👋
-                </Text>
-                <Text className="text-base text-text-secondary dark:text-dark-text-secondary">
-                    Bem-vindo à área privada do app
-                </Text>
+                <View className="flex-row items-center justify-between mb-4">
+                    <View className="flex-1">
+                        <Text className="text-2xl font-bold text-text-primary dark:text-dark-text-primary mb-2">
+                            Olá, {user?.name}! 👋
+                        </Text>
+                        <Text className="text-base text-text-secondary dark:text-dark-text-secondary">
+                            Bem-vindo à área privada do app
+                        </Text>
+                    </View>
+                    <View className="ml-4">
+                        <ThemeToggle />
+                    </View>
+                </View>
             </View>
+
+            {/* Debug do Tema */}
+            <ThemeDebug />
 
             {/* User Profile com Suspense */}
             <Suspense
