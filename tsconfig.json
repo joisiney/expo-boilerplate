@@ -1,8 +1,6 @@
 {
     "extends": "expo/tsconfig.base",
     "compilerOptions": {
-        "lib": ["DOM", "ES2022"],
-        "types": ["jest"],
         "skipLibCheck": true,
         "strict": true,
         "jsx": "react-jsx",
