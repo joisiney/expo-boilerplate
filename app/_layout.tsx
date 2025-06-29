@@ -8,8 +8,10 @@ import {
 } from '@expo-google-fonts/quicksand';
 import {Stack} from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
+import {AuthProvider, useAuth} from '@/core/config/auth';
 import {LinguiProvider} from '@/core/config/lingui/provider';
 import {tw, useClassNameToColor} from '@/core/config/nativewind';
+import {ReactQueryProvider} from '@/core/config/react-query';
 import {ThemeProvider} from '@/core/config/theme';
 import 'react-native-reanimated';
 
@@ -21,6 +23,8 @@ function RootLayoutContent() {
         Quicksand_500Medium,
         Quicksand_700Bold
     });
+
+    const {isAuthenticated} = useAuth();
 
     useEffect(() => {
         if (loaded) {
@@ -36,9 +40,11 @@ function RootLayoutContent() {
     const statusBarBackground = useClassNameToColor(
         'bg-background-primary dark:bg-dark-background-primary'
     );
+
     if (!loaded) {
         return null;
     }
+
     return (
         <>
             <Stack
@@ -55,6 +61,28 @@ function RootLayoutContent() {
                         title: 'Home'
                     }}
                 />
+
+                {/* Rota de login - só disponível quando não autenticado */}
+                <Stack.Protected guard={!isAuthenticated}>
+                    <Stack.Screen
+                        name="sign-in"
+                        options={{
+                            headerShown: true,
+                            title: 'Entrar'
+                        }}
+                    />
+                </Stack.Protected>
+
+                {/* Rotas protegidas - só disponível quando autenticado */}
+                <Stack.Protected guard={isAuthenticated}>
+                    <Stack.Screen
+                        name="private"
+                        options={{
+                            headerShown: false
+                        }}
+                    />
+                </Stack.Protected>
+
                 <Stack.Screen
                     name="+not-found"
                     options={{
@@ -71,10 +99,14 @@ function RootLayoutContent() {
 
 export default function RootLayout() {
     return (
-        <ThemeProvider>
-            <LinguiProvider>
-                <RootLayoutContent />
-            </LinguiProvider>
-        </ThemeProvider>
+        <ReactQueryProvider>
+            <ThemeProvider>
+                <AuthProvider>
+                    <LinguiProvider>
+                        <RootLayoutContent />
+                    </LinguiProvider>
+                </AuthProvider>
+            </ThemeProvider>
+        </ReactQueryProvider>
     );
 }

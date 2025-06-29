@@ -1,106 +1,118 @@
-import {Text, View, TouchableOpacity, ScrollView} from 'react-native';
-import {t} from '@lingui/core/macro';
+import React from 'react';
+import {View, ScrollView, Text} from 'react-native';
+import {Trans} from '@lingui/macro';
+import {Link, router} from 'expo-router';
+import {Button} from '@/atoms/button';
 import {ThemeToggle} from '@/atoms/theme-toggle';
-import {useLocale} from '@/core/config/lingui/hooks';
-import {ThemedView} from '@/core/config/theme';
+import {useAuth} from '@/core/config/auth';
 
-export default function Index() {
-    const {changeLocale, availableLocales, currentLocale} = useLocale();
+export default function HomeScreen() {
+    const {isAuthenticated, user, signOut} = useAuth();
+
+    const handleGoToPrivate = () => {
+        router.push('/private/home');
+    };
+
+    const handleSignOut = () => {
+        signOut();
+    };
 
     return (
-        <ThemedView className="flex-1 bg-background-primary dark:bg-dark-background-primary">
-            <ScrollView className="flex-1 p-5">
-                {/* Header com título */}
-                <View className="items-center mt-10 mb-6 bg-primary-500 p-6 rounded-xl">
-                    <Text className="text-white text-3xl font-bold text-center">
-                        {t`Expo Boilerplate`}
+        <ScrollView className="flex-1 bg-background-primary dark:bg-dark-background-primary">
+            <View className="flex-1 items-center justify-center px-6 py-12">
+                {/* Header */}
+                <View className="items-center mb-8">
+                    <Text className="text-3xl font-bold text-center mb-4 text-text-primary dark:text-dark-text-primary">
+                        <Trans>Expo Boilerplate</Trans>
                     </Text>
-                    <Text className="text-white text-base text-center mt-2 opacity-90">
-                        {t`Um ponto de partida para seus projetos`}
+                    <Text className="text-base text-center text-text-secondary dark:text-dark-text-secondary">
+                        <Trans>
+                            Template moderno com autenticação, rotas protegidas
+                            e React Query
+                        </Trans>
                     </Text>
                 </View>
 
-                {/* Controle de Tema */}
-                <View className="mb-6">
-                    <Text className="font-bold text-lg mb-3 text-text-primary dark:text-dark-text-primary">
-                        {t`Controle de Tema`}
+                {/* Authentication Status */}
+                <View className="w-full max-w-sm mb-8">
+                    {isAuthenticated ? (
+                        <View className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4">
+                            <Text className="text-green-800 dark:text-green-200 font-medium text-center mb-2">
+                                ✅ Você está logado!
+                            </Text>
+                            <Text className="text-green-700 dark:text-green-300 text-sm text-center mb-4">
+                                Olá, {user?.name}
+                            </Text>
+                            <View className="space-y-2">
+                                <Button
+                                    title="Ir para Área Privada"
+                                    onPress={handleGoToPrivate}
+                                    size="sm"
+                                />
+                                <Button
+                                    title="Sair"
+                                    variant="outline"
+                                    onPress={handleSignOut}
+                                    size="sm"
+                                />
+                            </View>
+                        </View>
+                    ) : (
+                        <View className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                            <Text className="text-blue-800 dark:text-blue-200 font-medium text-center mb-2">
+                                🔒 Você não está logado
+                            </Text>
+                            <Text className="text-blue-700 dark:text-blue-300 text-sm text-center mb-4">
+                                Faça login para acessar a área privada
+                            </Text>
+                            <Link href="/sign-in" asChild>
+                                <Button title="Fazer Login" size="sm" />
+                            </Link>
+                        </View>
+                    )}
+                </View>
+
+                {/* Features */}
+                <View className="w-full max-w-sm mb-8">
+                    <Text className="text-xl font-bold text-center mb-4 text-text-primary dark:text-dark-text-primary">
+                        <Trans>Recursos</Trans>
+                    </Text>
+                    <View className="space-y-3">
+                        <View className="bg-white dark:bg-gray-800 rounded-lg p-3">
+                            <Text className="font-medium text-text-primary dark:text-dark-text-primary">
+                                🔐 Autenticação
+                            </Text>
+                            <Text className="text-sm text-text-secondary dark:text-dark-text-secondary">
+                                Sistema completo com rotas protegidas
+                            </Text>
+                        </View>
+                        <View className="bg-white dark:bg-gray-800 rounded-lg p-3">
+                            <Text className="font-medium text-text-primary dark:text-dark-text-primary">
+                                📱 React Query
+                            </Text>
+                            <Text className="text-sm text-text-secondary dark:text-dark-text-secondary">
+                                Gerenciamento de estado com Suspense
+                            </Text>
+                        </View>
+                        <View className="bg-white dark:bg-gray-800 rounded-lg p-3">
+                            <Text className="font-medium text-text-primary dark:text-dark-text-primary">
+                                🎨 Formulários
+                            </Text>
+                            <Text className="text-sm text-text-secondary dark:text-dark-text-secondary">
+                                React Hook Form + Zod validation
+                            </Text>
+                        </View>
+                    </View>
+                </View>
+
+                {/* Theme Toggle */}
+                <View className="items-center">
+                    <Text className="text-sm mb-3 text-text-secondary dark:text-dark-text-secondary">
+                        <Trans>Tema</Trans>
                     </Text>
                     <ThemeToggle />
                 </View>
-
-                {/* Controle de Idioma */}
-                <View className="p-4 mb-6 rounded-xl border bg-surface-secondary dark:bg-dark-surface-secondary border-border-light dark:border-dark-border-light">
-                    <Text className="font-bold text-lg mb-3 text-text-primary dark:text-dark-text-primary">
-                        {t`Idioma atual`}: {currentLocale}
-                    </Text>
-                    <View className="flex-row gap-2 flex-wrap">
-                        {availableLocales.map(({code, name}) => (
-                            <TouchableOpacity
-                                key={code}
-                                onPress={() => changeLocale(code)}
-                                className={`p-3 rounded-lg border ${
-                                    currentLocale === code
-                                        ? 'bg-primary-500 border-primary-600'
-                                        : 'bg-surface-primary dark:bg-dark-surface-primary border-border-medium dark:border-dark-border-medium'
-                                }`}
-                            >
-                                <Text
-                                    className={`font-medium ${
-                                        currentLocale === code
-                                            ? 'text-white'
-                                            : 'text-text-primary dark:text-dark-text-primary'
-                                    }`}
-                                >
-                                    {name}
-                                </Text>
-                            </TouchableOpacity>
-                        ))}
-                    </View>
-                </View>
-
-                {/* Lista de Features */}
-                <View className="p-4 mb-6 rounded-xl border bg-surface-secondary dark:bg-dark-surface-secondary border-border-light dark:border-dark-border-light">
-                    <Text className="font-bold text-lg mb-3 text-text-primary dark:text-dark-text-primary">
-                        {t`Este boilerplate inclui:`}
-                    </Text>
-                    <View className="space-y-2">
-                        <Text className="text-text-secondary dark:text-dark-text-secondary">
-                            {t`✨ Expo Router`}
-                        </Text>
-                        <Text className="text-text-secondary dark:text-dark-text-secondary">
-                            {t`🎨 Fonte Quicksand`}
-                        </Text>
-                        <Text className="text-text-secondary dark:text-dark-text-secondary">
-                            {t`🧪 Jest + Testing Library`}
-                        </Text>
-                        <Text className="text-text-secondary dark:text-dark-text-secondary">
-                            {t`📱 TypeScript`}
-                        </Text>
-                        <Text className="text-text-secondary dark:text-dark-text-secondary">
-                            {t`🎯 ESLint + Prettier`}
-                        </Text>
-                        <Text className="text-text-secondary dark:text-dark-text-secondary">
-                            {t`🎨 NativeWind (Tailwind CSS)`}
-                        </Text>
-                        <Text className="text-text-secondary dark:text-dark-text-secondary">
-                            {t`🌍 Lingui (i18n)`}
-                        </Text>
-                        <Text className="text-text-secondary dark:text-dark-text-secondary">
-                            {t`🌙 Sistema de Temas (Light/Dark)`}
-                        </Text>
-                    </View>
-                </View>
-
-                {/* Footer */}
-                <View className="items-center py-6">
-                    <Text className="font-sans text-lg text-center text-text-primary dark:text-dark-text-primary">
-                        {t`Tudo configurado e funcionando!`} 🎉
-                    </Text>
-                    <Text className="text-sm text-center mt-2 text-text-tertiary dark:text-dark-text-tertiary">
-                        {t`Pronto para desenvolvimento`}
-                    </Text>
-                </View>
-            </ScrollView>
-        </ThemedView>
+            </View>
+        </ScrollView>
     );
 }
