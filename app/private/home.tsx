@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import {useSuspenseQuery} from '@tanstack/react-query';
 import {router} from 'expo-router';
+import {useColorScheme} from 'nativewind';
 import {Button} from '@/atoms/button';
 import {ThemeToggle} from '@/atoms/theme-toggle';
 import {useAuth} from '@/core/config/auth';
@@ -18,19 +19,35 @@ import {api, type Post} from '@/core/services/api';
 // Componente para debug do tema
 function ThemeDebug() {
     const {theme, effectiveTheme} = useTheme();
+    const {colorScheme} = useColorScheme();
 
     return (
-        <View className="bg-blue-100 dark:bg-blue-900 p-3 rounded-lg mb-4 border border-blue-300 dark:border-blue-700">
-            <Text className="text-blue-800 dark:text-blue-200 font-medium text-sm">
-                🔧 Debug Tema:
+        <View className="border-2 border-red-500 p-4 mb-4 rounded-lg">
+            <Text className="text-red-600 font-bold mb-2">🔧 DEBUG TEMA:</Text>
+            <Text className="text-black dark:text-white text-sm mb-1">
+                Contexto - Configurado: {theme} | Efetivo: {effectiveTheme}
             </Text>
-            <Text className="text-blue-700 dark:text-blue-300 text-xs">
-                Configurado: {theme} | Ativo: {effectiveTheme}
+            <Text className="text-black dark:text-white text-sm mb-1">
+                NativeWind colorScheme: {colorScheme}
             </Text>
-            <View className="mt-2 p-2 bg-white dark:bg-gray-800 rounded">
-                <Text className="text-gray-900 dark:text-gray-100 text-xs">
-                    Este texto deve mudar de cor conforme o tema
-                </Text>
+
+            {/* Teste direto de cores */}
+            <View className="mt-3 space-y-2">
+                <View className="bg-white dark:bg-black p-2 rounded">
+                    <Text className="text-black dark:text-white text-xs">
+                        ✓ Fundo: branco → preto
+                    </Text>
+                </View>
+                <View className="bg-blue-100 dark:bg-blue-900 p-2 rounded">
+                    <Text className="text-blue-900 dark:text-blue-100 text-xs">
+                        ✓ Azul claro → azul escuro
+                    </Text>
+                </View>
+                <View className="bg-gray-200 dark:bg-gray-800 p-2 rounded">
+                    <Text className="text-gray-800 dark:text-gray-200 text-xs">
+                        ✓ Cinza claro → cinza escuro
+                    </Text>
+                </View>
             </View>
         </View>
     );
@@ -145,7 +162,7 @@ export default function PrivateHomeScreen() {
 
     return (
         <ScrollView
-            className="flex-1 bg-background-primary dark:bg-dark-background-primary"
+            className="flex-1 bg-white dark:bg-black"
             contentContainerStyle={{padding: 16}}
             refreshControl={
                 <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
@@ -155,10 +172,10 @@ export default function PrivateHomeScreen() {
             <View className="mb-6">
                 <View className="flex-row items-center justify-between mb-4">
                     <View className="flex-1">
-                        <Text className="text-2xl font-bold text-text-primary dark:text-dark-text-primary mb-2">
+                        <Text className="text-2xl font-bold text-black dark:text-white mb-2">
                             Olá, {user?.name}! 👋
                         </Text>
-                        <Text className="text-base text-text-secondary dark:text-dark-text-secondary">
+                        <Text className="text-base text-gray-600 dark:text-gray-400">
                             Bem-vindo à área privada do app
                         </Text>
                     </View>

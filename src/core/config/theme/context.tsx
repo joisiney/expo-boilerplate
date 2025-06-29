@@ -1,5 +1,5 @@
-import React, {createContext, useContext, useState} from 'react';
-import {useColorScheme} from 'react-native';
+import React, {createContext, useContext, useState, useEffect} from 'react';
+import {useColorScheme} from 'nativewind';
 
 type Theme = 'light' | 'dark' | 'system';
 
@@ -17,12 +17,21 @@ interface ThemeProviderProps {
 }
 
 export function ThemeProvider({children}: ThemeProviderProps) {
-    const systemColorScheme = useColorScheme();
+    const {colorScheme, setColorScheme} = useColorScheme();
     const [theme, setTheme] = useState<Theme>('system');
 
     // Determina o tema efetivo baseado na preferência
     const effectiveTheme: 'light' | 'dark' =
-        theme === 'system' ? (systemColorScheme ?? 'light') : theme;
+        theme === 'system' ? (colorScheme ?? 'light') : theme;
+
+    // Sincroniza mudanças do tema com o NativeWind
+    useEffect(() => {
+        if (theme === 'system') {
+            setColorScheme('system');
+        } else {
+            setColorScheme(theme);
+        }
+    }, [theme, setColorScheme]);
 
     const toggleTheme = () => {
         setTheme((current) => {
@@ -32,10 +41,14 @@ export function ThemeProvider({children}: ThemeProviderProps) {
         });
     };
 
+    const handleSetTheme = (newTheme: Theme) => {
+        setTheme(newTheme);
+    };
+
     const value: ThemeContextType = {
         theme,
         effectiveTheme,
-        setTheme,
+        setTheme: handleSetTheme,
         toggleTheme
     };
 
