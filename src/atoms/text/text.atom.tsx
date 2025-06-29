@@ -6,8 +6,8 @@ import {getTextClasses} from './text.variant';
 export const TextAtom: FC<PropsWithChildren<NText.Props>> = ({
     children,
     variant = 'body',
-    size = 'medium',
-    className = '',
+    size,
+    className,
     ...props
 }) => {
     const classes = getTextClasses(variant, size, className);

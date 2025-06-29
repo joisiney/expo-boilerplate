@@ -1,34 +1,29 @@
 {
-  "extends": "expo/tsconfig.base",
-  "compilerOptions": {
-    "strict": true,
-    "jsx": "react-jsx",
-    "baseUrl": ".",
-    "typeRoots": [
-      "./node_modules/@types",
-      "./src/@types"
-    ],
-    "paths": {
-      "@/*": [
-        "./src/*"
-      ],
-      "@app/*": [
-        "./app/*"
-      ],
-      "@mocks/*": [
-        "./src/__tests__/mocks/*"
-      ],
-      "@tests/*": [
-        "./src/__tests__/*"
-      ]
-    }
-  },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    ".expo/types/**/*.ts",
-    "expo-env.d.ts",
-    "nativewind-env.d.ts",
-    "src/@types/**/*.d.ts"
-  ]
+    "extends": "expo/tsconfig.base",
+    "compilerOptions": {
+        "lib": ["DOM", "ES2022"],
+        "types": ["jest"],
+        "skipLibCheck": true,
+        "strict": true,
+        "jsx": "react-jsx",
+        "baseUrl": ".",
+        "esModuleInterop": true,
+        "resolveJsonModule": true,
+        "noImplicitAny": true,
+        "typeRoots": ["./node_modules/@types", "./src/@types"],
+        "paths": {
+            "@/*": ["./src/*"],
+            "@app/*": ["./app/*"],
+            "@mocks/*": ["./src/__tests__/mocks/*"],
+            "@tests/*": ["./src/__tests__/*"]
+        }
+    },
+    "include": [
+        "**/*.ts",
+        "**/*.tsx",
+        ".expo/types/**/*.ts",
+        "expo-env.d.ts",
+        "nativewind-env.d.ts",
+        "src/@types/**/*.d.ts"
+    ]
 }

@@ -27,7 +27,7 @@ describe('TextAtom', () => {
     });
 
     it('deve aplicar tamanho large', () => {
-        render(<HocMount size="large">Texto Grande</HocMount>);
+        render(<HocMount size="2xl">Texto Grande</HocMount>);
 
         expect(screen.getByText('Texto Grande')).toBeTruthy();
     });

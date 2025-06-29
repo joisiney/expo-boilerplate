@@ -13,15 +13,15 @@ export const textVariant = cva('font-sans text-text-primary', {
             label: 'font-sans-medium text-base'
         },
         size: {
-            small: 'text-xs',
-            medium: 'text-base',
-            large: 'text-xl',
-            xlarge: 'text-2xl'
+            xs: 'text-xs',
+            base: 'text-base',
+            xl: 'text-xl',
+            '2xl': 'text-2xl'
         }
     },
     defaultVariants: {
         variant: 'body',
-        size: 'medium'
+        size: 'base'
     }
 });
 
