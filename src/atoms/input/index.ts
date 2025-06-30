@@ -1,1 +1,2 @@
-export {Input, type InputProps} from './input.atom';
+export * from './input.atom';
+export type * from './input.types';
