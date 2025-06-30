@@ -1,6 +1,7 @@
 import React from 'react';
-import {TouchableOpacity, Text} from 'react-native';
+import {TouchableOpacity} from 'react-native';
 import {t} from '@lingui/core/macro';
+import TextAtom from '@/atoms/text';
 import {useTheme} from '@/core/config/theme';
 
 interface ThemeToggleProps {
@@ -27,14 +28,22 @@ export function ThemeToggle({className = ''}: ThemeToggleProps) {
             onPress={toggleTheme}
             className={`flex-row items-center p-3 rounded-lg border border-border-light dark:border-dark-border-light bg-surface-primary dark:bg-dark-surface-primary ${className}`}
         >
-            <Text className="text-2xl mr-2">{getThemeIcon()}</Text>
-            <Text className="font-medium text-text-primary dark:text-dark-text-primary">
+            <TextAtom size="2xl" className="mr-2">
+                {getThemeIcon()}
+            </TextAtom>
+            <TextAtom
+                variant="label"
+                className="text-text-primary dark:text-dark-text-primary"
+            >
                 {t`Tema`}: {getThemeLabel()}
-            </Text>
-            <Text className="text-sm ml-2 text-text-secondary dark:text-dark-text-secondary">
+            </TextAtom>
+            <TextAtom
+                variant="caption"
+                className="ml-2 text-text-secondary dark:text-dark-text-secondary"
+            >
                 ({t`Ativo`}: {effectiveTheme === 'light' ? t`Claro` : t`Escuro`}
                 )
-            </Text>
+            </TextAtom>
         </TouchableOpacity>
     );
 }

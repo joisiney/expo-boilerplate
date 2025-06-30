@@ -1,7 +1,8 @@
 import {forwardRef} from 'react';
-import {Text, TextInput, View} from 'react-native';
+import {TextInput, View} from 'react-native';
 import {NInputAtom} from './input.types';
 import {inputVariant} from './input.variant';
+import TextAtom from '@/atoms/text';
 
 export const InputAtom = forwardRef<TextInput, NInputAtom.Props>(
     (
@@ -11,9 +12,9 @@ export const InputAtom = forwardRef<TextInput, NInputAtom.Props>(
         return (
             <View testID={`${testID}-atom`} className="w-full">
                 {label && (
-                    <Text className="text-sm font-medium text-foreground dark:text-dark-foreground mb-2">
+                    <TextAtom variant="label" className="mb-2">
                         {label}
-                    </Text>
+                    </TextAtom>
                 )}
                 <TextInput
                     className={inputVariant({variant, size})}
@@ -22,9 +23,12 @@ export const InputAtom = forwardRef<TextInput, NInputAtom.Props>(
                     {...props}
                 />
                 {error && (
-                    <Text className="text-sm text-red-500 dark:text-red-400 mt-1">
+                    <TextAtom
+                        variant="caption"
+                        className="mt-1 text-red-500 dark:text-red-400"
+                    >
                         {error}
-                    </Text>
+                    </TextAtom>
                 )}
             </View>
         );

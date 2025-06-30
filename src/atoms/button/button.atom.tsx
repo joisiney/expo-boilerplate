@@ -1,7 +1,8 @@
 import {FC, PropsWithChildren} from 'react';
-import {Text, ActivityIndicator, Pressable} from 'react-native';
+import {ActivityIndicator, Pressable} from 'react-native';
 import {NButtonAtom} from './button.types';
 import {buttonVariant, textVariant} from './button.variant';
+import TextAtom from '@/atoms/text';
 
 export const ButtonAtom: FC<PropsWithChildren<NButtonAtom.Props>> = ({
     testID,
@@ -17,7 +18,9 @@ export const ButtonAtom: FC<PropsWithChildren<NButtonAtom.Props>> = ({
     const renderContent = () => {
         if (typeof children === 'string') {
             return (
-                <Text className={textVariant({variant, size})}>{children}</Text>
+                <TextAtom className={textVariant({variant, size})}>
+                    {children}
+                </TextAtom>
             );
         }
         return children;
