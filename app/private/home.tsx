@@ -1,7 +1,6 @@
 import React, {Suspense} from 'react';
 import {
     View,
-    Text,
     ScrollView,
     ActivityIndicator,
     Alert,
@@ -11,6 +10,7 @@ import {useSuspenseQuery} from '@tanstack/react-query';
 import {router} from 'expo-router';
 import {useColorScheme} from 'nativewind';
 import {ButtonAtom} from '@/atoms/button';
+import TextAtom from '@/atoms/text';
 import {ThemeToggle} from '@/atoms/theme-toggle';
 import {useAuth} from '@/core/config/auth';
 import {useTheme} from '@/core/config/theme';
@@ -23,30 +23,32 @@ function ThemeDebug() {
 
     return (
         <View className="border-2 border-red-500 p-4 mb-4 rounded-lg">
-            <Text className="text-red-600 font-bold mb-2">🔧 DEBUG TEMA:</Text>
-            <Text className="text-black dark:text-white text-sm mb-1">
+            <TextAtom className="text-red-600 font-bold mb-2">
+                🔧 DEBUG TEMA:
+            </TextAtom>
+            <TextAtom className="text-black dark:text-white text-sm mb-1">
                 Contexto - Configurado: {theme} | Efetivo: {effectiveTheme}
-            </Text>
-            <Text className="text-black dark:text-white text-sm mb-1">
+            </TextAtom>
+            <TextAtom className="text-black dark:text-white text-sm mb-1">
                 NativeWind colorScheme: {colorScheme}
-            </Text>
+            </TextAtom>
 
             {/* Teste direto de cores */}
             <View className="mt-3 space-y-2">
                 <View className="bg-white dark:bg-black p-2 rounded">
-                    <Text className="text-black dark:text-white text-xs">
+                    <TextAtom className="text-black dark:text-white text-xs">
                         ✓ Fundo: branco → preto
-                    </Text>
+                    </TextAtom>
                 </View>
                 <View className="bg-blue-100 dark:bg-blue-900 p-2 rounded">
-                    <Text className="text-blue-900 dark:text-blue-100 text-xs">
+                    <TextAtom className="text-blue-900 dark:text-blue-100 text-xs">
                         ✓ Azul claro → azul escuro
-                    </Text>
+                    </TextAtom>
                 </View>
                 <View className="bg-gray-200 dark:bg-gray-800 p-2 rounded">
-                    <Text className="text-gray-800 dark:text-gray-200 text-xs">
+                    <TextAtom className="text-gray-800 dark:text-gray-200 text-xs">
                         ✓ Cinza claro → cinza escuro
-                    </Text>
+                    </TextAtom>
                 </View>
             </View>
         </View>
@@ -63,14 +65,14 @@ function UserProfile() {
     return (
         <View className="bg-white dark:bg-gray-800 rounded-lg p-4 mb-4 shadow-sm">
             <View className="flex-row items-center mb-3">
-                <Text className="text-4xl mr-3">{user.avatar}</Text>
+                <TextAtom className="text-4xl mr-3">{user.avatar}</TextAtom>
                 <View className="flex-1">
-                    <Text className="text-lg font-semibold text-text-primary dark:text-dark-text-primary">
+                    <TextAtom className="text-lg font-semibold text-text-primary dark:text-dark-text-primary">
                         {user.name}
-                    </Text>
-                    <Text className="text-sm text-text-secondary dark:text-dark-text-secondary">
+                    </TextAtom>
+                    <TextAtom className="text-sm text-text-secondary dark:text-dark-text-secondary">
                         {user.email}
-                    </Text>
+                    </TextAtom>
                 </View>
             </View>
         </View>
@@ -86,34 +88,34 @@ function PostsList() {
 
     return (
         <View className="space-y-3">
-            <Text className="text-xl font-bold text-text-primary dark:text-dark-text-primary mb-3">
+            <TextAtom className="text-xl font-bold text-text-primary dark:text-dark-text-primary mb-3">
                 Posts Recentes
-            </Text>
+            </TextAtom>
             {posts.map((post: Post) => (
                 <View
                     key={post.id}
                     className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm"
                 >
-                    <Text className="text-lg font-semibold text-text-primary dark:text-dark-text-primary mb-2">
+                    <TextAtom className="text-lg font-semibold text-text-primary dark:text-dark-text-primary mb-2">
                         {post.title}
-                    </Text>
-                    <Text className="text-sm text-text-secondary dark:text-dark-text-secondary mb-3">
+                    </TextAtom>
+                    <TextAtom className="text-sm text-text-secondary dark:text-dark-text-secondary mb-3">
                         {post.content}
-                    </Text>
+                    </TextAtom>
                     <View className="flex-row items-center justify-between">
                         <View className="flex-row items-center">
-                            <Text className="text-base mr-2">
+                            <TextAtom className="text-base mr-2">
                                 {post.author.avatar}
-                            </Text>
-                            <Text className="text-sm text-text-secondary dark:text-dark-text-secondary">
+                            </TextAtom>
+                            <TextAtom className="text-sm text-text-secondary dark:text-dark-text-secondary">
                                 {post.author.name}
-                            </Text>
+                            </TextAtom>
                         </View>
-                        <Text className="text-xs text-text-tertiary dark:text-dark-text-tertiary">
+                        <TextAtom className="text-xs text-text-tertiary dark:text-dark-text-tertiary">
                             {new Date(post.createdAt).toLocaleDateString(
                                 'pt-BR'
                             )}
-                        </Text>
+                        </TextAtom>
                     </View>
                 </View>
             ))}
@@ -126,9 +128,9 @@ function LoadingSpinner({message}: {message: string}) {
     return (
         <View className="flex-1 justify-center items-center py-8">
             <ActivityIndicator size="large" color="#3B82F6" />
-            <Text className="text-text-secondary dark:text-dark-text-secondary mt-3 text-center">
+            <TextAtom className="text-text-secondary dark:text-dark-text-secondary mt-3 text-center">
                 {message}
-            </Text>
+            </TextAtom>
         </View>
     );
 }
@@ -172,12 +174,12 @@ export default function PrivateHomeScreen() {
             <View className="mb-6">
                 <View className="flex-row items-center justify-between mb-4">
                     <View className="flex-1">
-                        <Text className="text-2xl font-bold text-black dark:text-white mb-2">
+                        <TextAtom className="text-2xl font-bold text-black dark:text-white mb-2">
                             Olá, {user?.name}! 👋
-                        </Text>
-                        <Text className="text-base text-gray-600 dark:text-gray-400">
+                        </TextAtom>
+                        <TextAtom className="text-base text-gray-600 dark:text-gray-400">
                             Bem-vindo à área privada do app
-                        </Text>
+                        </TextAtom>
                     </View>
                     <View className="ml-4">
                         <ThemeToggle />

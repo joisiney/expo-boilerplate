@@ -2,17 +2,17 @@ import React from 'react';
 import {useForm, Controller} from 'react-hook-form';
 import {
     View,
-    Text,
-    Alert,
     ScrollView,
     KeyboardAvoidingView,
-    Platform
+    Platform,
+    Alert
 } from 'react-native';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {router} from 'expo-router';
 import {z} from 'zod';
 import {ButtonAtom} from '@/atoms/button';
 import {InputAtom} from '@/atoms/input';
+import TextAtom from '@/atoms/text';
 import {useAuth} from '@/core/config/auth';
 
 // Schema de validação com Zod
@@ -63,12 +63,12 @@ export default function SignInScreen() {
                     <View className="w-full max-w-sm mx-auto">
                         {/* Header */}
                         <View className="mb-8 items-center">
-                            <Text className="text-3xl font-bold text-text-primary dark:text-dark-text-primary mb-2">
+                            <TextAtom className="text-3xl font-bold text-text-primary dark:text-dark-text-primary mb-2">
                                 Bem-vindo
-                            </Text>
-                            <Text className="text-base text-text-secondary dark:text-dark-text-secondary text-center">
+                            </TextAtom>
+                            <TextAtom className="text-base text-text-secondary dark:text-dark-text-secondary text-center">
                                 Entre com sua conta para continuar
-                            </Text>
+                            </TextAtom>
                         </View>
 
                         {/* Form */}
@@ -124,9 +124,9 @@ export default function SignInScreen() {
 
                         {/* Footer */}
                         <View className="mt-8 items-center">
-                            <Text className="text-sm text-text-secondary dark:text-dark-text-secondary">
+                            <TextAtom className="text-sm text-text-secondary dark:text-dark-text-secondary">
                                 Use qualquer email e senha para testar
-                            </Text>
+                            </TextAtom>
                         </View>
                     </View>
                 </View>
