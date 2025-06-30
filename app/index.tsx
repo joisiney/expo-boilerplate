@@ -2,7 +2,7 @@ import React from 'react';
 import {View, ScrollView, Text} from 'react-native';
 import {Trans} from '@lingui/macro';
 import {Link, router} from 'expo-router';
-import {Button} from '@/atoms/button';
+import {ButtonAtom} from '@/atoms/button';
 import {ThemeToggle} from '@/atoms/theme-toggle';
 import {useAuth} from '@/core/config/auth';
 
@@ -44,17 +44,19 @@ export default function HomeScreen() {
                                 Olá, {user?.name}
                             </Text>
                             <View className="space-y-2">
-                                <Button
-                                    title="Ir para Área Privada"
+                                <ButtonAtom
                                     onPress={handleGoToPrivate}
                                     size="sm"
-                                />
-                                <Button
-                                    title="Sair"
+                                >
+                                    Ir para Área Privada
+                                </ButtonAtom>
+                                <ButtonAtom
                                     variant="outline"
                                     onPress={handleSignOut}
                                     size="sm"
-                                />
+                                >
+                                    Sair
+                                </ButtonAtom>
                             </View>
                         </View>
                     ) : (
@@ -66,7 +68,7 @@ export default function HomeScreen() {
                                 Faça login para acessar a área privada
                             </Text>
                             <Link href="/sign-in" asChild>
-                                <Button title="Fazer Login" size="sm" />
+                                <ButtonAtom size="sm">Fazer Login</ButtonAtom>
                             </Link>
                         </View>
                     )}

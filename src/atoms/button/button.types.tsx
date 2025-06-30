@@ -7,7 +7,6 @@ export namespace NButtonAtom {
         Omit<PressableProps, 'className'> &
         VariantProps<typeof buttonVariant> &
         VariantProps<typeof textVariant> & {
-            title: string;
             loading?: boolean;
         };
 }

@@ -11,8 +11,8 @@ import {
 import {zodResolver} from '@hookform/resolvers/zod';
 import {router} from 'expo-router';
 import {z} from 'zod';
-import {Button} from '@/atoms/button';
-import {Input} from '@/atoms/input';
+import {ButtonAtom} from '@/atoms/button';
+import {InputAtom} from '@/atoms/input';
 import {useAuth} from '@/core/config/auth';
 
 // Schema de validação com Zod
@@ -29,7 +29,7 @@ export default function SignInScreen() {
     const {
         control,
         handleSubmit,
-        formState: {errors}
+        formState: {errors, isValid}
     } = useForm<SignInFormData>({
         resolver: zodResolver(signInSchema),
         defaultValues: {
@@ -79,7 +79,7 @@ export default function SignInScreen() {
                                 render={({
                                     field: {onChange, onBlur, value}
                                 }) => (
-                                    <Input
+                                    <InputAtom
                                         label="Email"
                                         placeholder="seu@email.com"
                                         value={value}
@@ -99,7 +99,7 @@ export default function SignInScreen() {
                                 render={({
                                     field: {onChange, onBlur, value}
                                 }) => (
-                                    <Input
+                                    <InputAtom
                                         label="Senha"
                                         placeholder="••••••••"
                                         value={value}
@@ -112,13 +112,14 @@ export default function SignInScreen() {
                                 )}
                             />
 
-                            <Button
-                                title={isLoading ? 'Entrando...' : 'Entrar'}
+                            <ButtonAtom
                                 onPress={handleSubmit(onSubmit)}
                                 loading={isLoading}
-                                disabled={isLoading}
+                                disabled={!isValid}
                                 size="lg"
-                            />
+                            >
+                                Entrar
+                            </ButtonAtom>
                         </View>
 
                         {/* Footer */}

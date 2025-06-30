@@ -1,11 +1,11 @@
-import {FC} from 'react';
+import {FC, PropsWithChildren} from 'react';
 import {Text, ActivityIndicator, Pressable} from 'react-native';
 import {NButtonAtom} from './button.types';
 import {buttonVariant, textVariant} from './button.variant';
 
-export const ButtonAtom: FC<NButtonAtom.Props> = ({
+export const ButtonAtom: FC<PropsWithChildren<NButtonAtom.Props>> = ({
     testID,
-    title,
+    children,
     variant = 'default',
     size = 'default',
     loading = false,
@@ -13,6 +13,15 @@ export const ButtonAtom: FC<NButtonAtom.Props> = ({
     ...props
 }) => {
     const isDisabled = disabled || loading;
+
+    const renderContent = () => {
+        if (typeof children === 'string') {
+            return (
+                <Text className={textVariant({variant, size})}>{children}</Text>
+            );
+        }
+        return children;
+    };
 
     return (
         <Pressable
@@ -32,7 +41,7 @@ export const ButtonAtom: FC<NButtonAtom.Props> = ({
                     style={{marginRight: 8}}
                 />
             )}
-            <Text className={textVariant({variant, size})}>{title}</Text>
+            {renderContent()}
         </Pressable>
     );
 };

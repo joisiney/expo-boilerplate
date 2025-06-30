@@ -10,7 +10,7 @@ import {
 import {useSuspenseQuery} from '@tanstack/react-query';
 import {router} from 'expo-router';
 import {useColorScheme} from 'nativewind';
-import {Button} from '@/atoms/button';
+import {ButtonAtom} from '@/atoms/button';
 import {ThemeToggle} from '@/atoms/theme-toggle';
 import {useAuth} from '@/core/config/auth';
 import {useTheme} from '@/core/config/theme';
@@ -204,16 +204,12 @@ export default function PrivateHomeScreen() {
 
             {/* Actions */}
             <View className="mt-8 space-y-3">
-                <Button
-                    title="Recarregar Dados"
-                    variant="outline"
-                    onPress={onRefresh}
-                />
-                <Button
-                    title="Sair"
-                    variant="destructive"
-                    onPress={handleSignOut}
-                />
+                <ButtonAtom variant="outline" onPress={onRefresh}>
+                    Recarregar Dados
+                </ButtonAtom>
+                <ButtonAtom onPress={handleSignOut} variant="outline" size="sm">
+                    Sair
+                </ButtonAtom>
             </View>
         </ScrollView>
     );

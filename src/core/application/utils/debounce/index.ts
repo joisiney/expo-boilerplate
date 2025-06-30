@@ -5,7 +5,7 @@ export const useEventDebounce = <T extends (...args: any[]) => any>(
     handle: T,
     delay: number
 ) => {
-    const timeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
+    const timeoutRef = useRef<number | undefined>(undefined);
     const handleDebounce = (...rest: Parameters<T>): void => {
         if (timeoutRef.current) {
             clearTimeout(timeoutRef.current);
