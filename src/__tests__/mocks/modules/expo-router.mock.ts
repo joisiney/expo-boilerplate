@@ -3,6 +3,7 @@ import {PropsWithChildren} from 'react';
 jest.mock('expo-router', () => {
     const StackComponent = ({children}: PropsWithChildren) => children;
     StackComponent.Screen = ({children}: PropsWithChildren) => children;
+    StackComponent.Protected = ({children}: PropsWithChildren) => children;
 
     const LinkComponent = ({
         children
