@@ -13,7 +13,7 @@ import {z} from 'zod';
 import {ButtonAtom} from '@/atoms/button';
 import TextAtom from '@/atoms/text';
 import {useAuth} from '@/core/config/auth';
-import {FormInput} from '@/molecules';
+import {FormInputMolecule} from '@/molecules';
 
 // Schema de validação com Zod
 const signInSchema = z.object({
@@ -73,7 +73,7 @@ export default function SignInScreen() {
 
                         {/* Form */}
                         <View className="space-y-4">
-                            <FormInput
+                            <FormInputMolecule
                                 control={control}
                                 name="email"
                                 label="Email"
@@ -83,7 +83,7 @@ export default function SignInScreen() {
                                 autoComplete="email"
                             />
 
-                            <FormInput
+                            <FormInputMolecule
                                 control={control}
                                 name="password"
                                 label="Senha"

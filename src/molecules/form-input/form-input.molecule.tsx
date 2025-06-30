@@ -1,19 +1,16 @@
-import React from 'react';
-import {Controller, Control, FieldPath, FieldValues} from 'react-hook-form';
-import {InputAtom, NInputAtom} from '@/atoms/input';
+import {Controller, FieldPath, FieldValues} from 'react-hook-form';
+import {NFormInputMolecule} from './form-input.type';
+import {InputAtom} from '@/atoms/input';
 
-export interface FormInputProps<
+export const FormInputMolecule = <
     TFieldValues extends FieldValues = FieldValues,
     TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
-> extends Omit<NInputAtom.Props, 'value' | 'onChangeText' | 'onBlur'> {
-    control: Control<TFieldValues>;
-    name: TName;
-}
-
-export function FormInput<
-    TFieldValues extends FieldValues = FieldValues,
-    TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
->({control, name, ...inputProps}: FormInputProps<TFieldValues, TName>) {
+>({
+    testID,
+    control,
+    name,
+    ...inputProps
+}: NFormInputMolecule.Props<TFieldValues, TName>) => {
     return (
         <Controller
             control={control}
@@ -24,6 +21,7 @@ export function FormInput<
             }) => (
                 <InputAtom
                     {...inputProps}
+                    testID={testID}
                     value={value}
                     onChangeText={onChange}
                     onBlur={onBlur}
@@ -32,4 +30,4 @@ export function FormInput<
             )}
         />
     );
-}
+};

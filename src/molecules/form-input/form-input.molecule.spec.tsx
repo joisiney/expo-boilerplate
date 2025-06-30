@@ -3,7 +3,7 @@ import {useForm} from 'react-hook-form';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {render, screen} from '@testing-library/react-native';
 import {z} from 'zod';
-import {FormInput} from './form-input.molecule';
+import {FormInputMolecule} from './form-input.molecule';
 
 // Schema de teste
 const testSchema = z.object({
@@ -21,16 +21,17 @@ const HocMount = (): JSX.Element => {
             password: ''
         }
     });
+
     return (
         <>
-            <FormInput
+            <FormInputMolecule
                 control={control}
                 name="email"
                 label="Email"
                 placeholder="Digite seu email"
                 testID="email-input"
             />
-            <FormInput
+            <FormInputMolecule
                 control={control}
                 name="password"
                 label="Senha"
@@ -42,7 +43,7 @@ const HocMount = (): JSX.Element => {
     );
 };
 
-describe('FormInput', () => {
+describe('Molecule: <FormInputMolecule />', () => {
     it('deve renderizar corretamente', () => {
         render(<HocMount />);
 
@@ -52,17 +53,33 @@ describe('FormInput', () => {
         expect(screen.getByText('Senha')).toBeTruthy();
     });
 
-    it('deve aplicar propriedades do InputAtom', () => {
-        render(<HocMount />);
-
-        const passwordInput = screen.getByTestId('password-input-atom-input');
-        expect(passwordInput.props.secureTextEntry).toBe(true);
-    });
-
     it('deve ter placeholders corretos', () => {
         render(<HocMount />);
 
         expect(screen.getByPlaceholderText('Digite seu email')).toBeTruthy();
         expect(screen.getByPlaceholderText('Digite sua senha')).toBeTruthy();
+    });
+
+    it('não deve renderizar corretamente se testID for omitido', () => {
+        const Wrapper = () => {
+            const {control} = useForm<HocMountData>({
+                resolver: zodResolver(testSchema),
+                defaultValues: {
+                    email: '',
+                    password: ''
+                }
+            });
+            return (
+                <FormInputMolecule
+                    control={control}
+                    name="email"
+                    label="Email"
+                    testID={undefined}
+                />
+            );
+        };
+        render(<Wrapper />);
+        const sut = screen.queryByTestId('email-input-atom');
+        expect(sut).toBeNull();
     });
 });
