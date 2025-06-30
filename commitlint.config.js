@@ -32,6 +32,28 @@ module.exports = {
         'body-leading-blank': [1, 'always'],
         'body-max-line-length': [2, 'always', 100],
         'footer-leading-blank': [1, 'always'],
-        'footer-max-line-length': [2, 'always', 100]
-    }
+        'footer-max-line-length': [2, 'always', 100],
+        // Regra customizada para proibir \n e \n\n
+        'no-literal-backslash-n': [2, 'always']
+    },
+    plugins: [
+        {
+            rules: {
+                'no-literal-backslash-n': ({header, body, footer}) => {
+                    const regex = /\\n/;
+                    if (
+                        regex.test(header) ||
+                        regex.test(body) ||
+                        regex.test(footer)
+                    ) {
+                        return [
+                            false,
+                            'A mensagem de commit não pode conter \\n ou \\n\\n literais. Use múltiplos -m ou quebras de linha reais.'
+                        ];
+                    }
+                    return [true];
+                }
+            }
+        }
+    ]
 };
