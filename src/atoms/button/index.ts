@@ -1,1 +1,2 @@
-export {Button, type ButtonProps} from './button.atom';
+export * from './button.atom';
+export type * from './button.types';
