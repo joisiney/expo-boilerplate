@@ -12,7 +12,11 @@ export const InputAtom = forwardRef<TextInput, NInputAtom.Props>(
         return (
             <View testID={`${testID}-atom`} className="w-full">
                 {label && (
-                    <TextAtom variant="label" className="mb-2">
+                    <TextAtom
+                        variant="label"
+                        className="mb-2"
+                        testID={`${testID}-atom-label`}
+                    >
                         {label}
                     </TextAtom>
                 )}
@@ -21,11 +25,13 @@ export const InputAtom = forwardRef<TextInput, NInputAtom.Props>(
                     placeholderTextColor="#6B7280"
                     ref={ref}
                     {...props}
+                    testID={`${testID}-atom-input`}
                 />
                 {error && (
                     <TextAtom
                         variant="caption"
                         className="mt-1 text-red-500 dark:text-red-400"
+                        testID={`${testID}-atom-error`}
                     >
                         {error}
                     </TextAtom>
