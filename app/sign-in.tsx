@@ -1,5 +1,5 @@
 import React from 'react';
-import {useForm, Controller} from 'react-hook-form';
+import {useForm} from 'react-hook-form';
 import {
     View,
     ScrollView,
@@ -11,9 +11,9 @@ import {zodResolver} from '@hookform/resolvers/zod';
 import {router} from 'expo-router';
 import {z} from 'zod';
 import {ButtonAtom} from '@/atoms/button';
-import {InputAtom} from '@/atoms/input';
 import TextAtom from '@/atoms/text';
 import {useAuth} from '@/core/config/auth';
+import {FormInput} from '@/molecules';
 
 // Schema de validação com Zod
 const signInSchema = z.object({
@@ -29,7 +29,7 @@ export default function SignInScreen() {
     const {
         control,
         handleSubmit,
-        formState: {errors, isValid}
+        formState: {isValid}
     } = useForm<SignInFormData>({
         resolver: zodResolver(signInSchema),
         defaultValues: {
@@ -73,43 +73,23 @@ export default function SignInScreen() {
 
                         {/* Form */}
                         <View className="space-y-4">
-                            <Controller
+                            <FormInput
                                 control={control}
                                 name="email"
-                                render={({
-                                    field: {onChange, onBlur, value}
-                                }) => (
-                                    <InputAtom
-                                        label="Email"
-                                        placeholder="seu@email.com"
-                                        value={value}
-                                        onChangeText={onChange}
-                                        onBlur={onBlur}
-                                        error={errors.email?.message}
-                                        keyboardType="email-address"
-                                        autoCapitalize="none"
-                                        autoComplete="email"
-                                    />
-                                )}
+                                label="Email"
+                                placeholder="seu@email.com"
+                                keyboardType="email-address"
+                                autoCapitalize="none"
+                                autoComplete="email"
                             />
 
-                            <Controller
+                            <FormInput
                                 control={control}
                                 name="password"
-                                render={({
-                                    field: {onChange, onBlur, value}
-                                }) => (
-                                    <InputAtom
-                                        label="Senha"
-                                        placeholder="••••••••"
-                                        value={value}
-                                        onChangeText={onChange}
-                                        onBlur={onBlur}
-                                        error={errors.password?.message}
-                                        secureTextEntry
-                                        autoComplete="password"
-                                    />
-                                )}
+                                label="Senha"
+                                placeholder="••••••••"
+                                secureTextEntry
+                                autoComplete="password"
                             />
 
                             <ButtonAtom
