@@ -1,6 +1,3 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
-
 # Verificar se há alterações antes do lint
 git diff --quiet --exit-code
 CHANGES_BEFORE=$?
