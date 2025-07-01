@@ -81,6 +81,9 @@ yarn start
 │       │   └── nativewind/    # Configuração Tailwind
 ├── docs/                      # Documentação
 │   └── git-workflow.md        # Guia do workflow Git
+├── .docs/                     # Documentação técnica
+│   ├── husky-rules.md         # Regras e configurações do Husky
+│   └── non-essential-files.md # Arquivos não essenciais da aplicação
 ├── .husky/                    # Git hooks
 ├── .lintstagedrc.js          # Configuração lint-staged
 └── commitlint.config.js      # Configuração commitlint
@@ -234,6 +237,17 @@ git push # Executa todas as verificações automaticamente
 ```
 
 📖 **Documentação completa**: [Git Workflow Guide](docs/git-workflow.md)
+
+## 📚 Documentação
+
+### **Documentação Técnica (.docs/)**
+
+- **[Husky Rules](.docs/husky-rules.md)** - Regras e configurações detalhadas do Husky
+- **[Non-Essential Files](.docs/non-essential-files.md)** - Lista de arquivos não essenciais para otimização
+
+### **Documentação Geral (docs/)**
+
+- **[Git Workflow](docs/git-workflow.md)** - Guia completo do workflow Git automatizado
 
 ## 🧪 Testes
 
