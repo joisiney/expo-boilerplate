@@ -21,7 +21,7 @@ const HocMount = (
 describe('Molecule: <ThemeToggleMolecule />', () => {
     it('deve renderizar corretamente', () => {
         render(<HocMount />);
-        const sut = screen.getByTestId('theme-toggle-molecule');
+        const sut = screen.getByTestId('theme-toggle-atom');
         expect(sut).toBeTruthy();
     });
 
@@ -47,7 +47,7 @@ describe('Molecule: <ThemeToggleMolecule />', () => {
 
     it('não deve renderizar corretamente se testID for omitido', () => {
         render(<HocMount testID={undefined} />);
-        const sut = screen.queryByTestId('theme-toggle-molecule');
+        const sut = screen.queryByTestId('theme-toggle-atom');
         expect(sut).toBeNull();
     });
 });
